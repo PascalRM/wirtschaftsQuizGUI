@@ -1,0 +1,11 @@
+<form>
+  Email:
+  <input type="text" name="email" #email><br>
+  Password:
+  <input type="password" name="password" #password><br>
+  <button (click)="login(email,password)" type="button" >Einloggen</button>
+</form>
+
+<p>Email: {{user.email}}</p>
+<p>API_Token: {{user.api_token}}</p>
+<p>ID: {{user.id}}</p>
