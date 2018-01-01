@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KategorieDetail } from '../kategorie_detail.model';
 
 @Component({
   selector: 'app-kategorie-detail',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./kategorie-detail.component.css']
 })
 export class KategorieDetailComponent implements OnInit {
+  kategorieDetail : KategorieDetail;
 
-  constructor() { }
+  constructor() {
+    this.kategorieDetail = KategorieDetail.kategorieDetail;
+  }
 
   ngOnInit() {
   }
