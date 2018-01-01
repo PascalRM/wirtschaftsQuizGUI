@@ -4,8 +4,7 @@ import { UserInterface} from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
 import {HttpModule, Http, Response} from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,6 @@ import 'rxjs/add/operator/map';
 })
 export class LoginComponent implements OnInit {
   user: User = User.getUser();
-  myData: any[] = [];
 
   constructor(private http: HttpClient) {
     this.user = User.getUser();

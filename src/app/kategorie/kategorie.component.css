@@ -1,0 +1,13 @@
+.kat_box{
+  width: calc(33% - 4px);
+  height: 22vh;
+  margin: 2px;
+  float: left;
+  text-align: center;
+  line-height: 20vh;
+}
+
+.kat_box p {
+  display: inline-block;
+  vertical-align: middle;
+}

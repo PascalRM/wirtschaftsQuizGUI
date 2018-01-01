@@ -1,3 +1,11 @@
-<p>
-  kategorie works!
-</p>
+<div class="container">
+  <h2>
+    Kategorien
+  </h2>
+  <hr>
+  <div class="well kat_box" *ngFor="let kategorie of kategorien">
+    <p>
+      {{ kategorie.name }}
+    </p>
+  </div>
+</div>
