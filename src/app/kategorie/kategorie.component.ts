@@ -5,7 +5,9 @@ import { UserInterface } from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
-
+import { KategorieDetail } from '../kategorie_detail.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-kategorie',
@@ -15,9 +17,12 @@ import { HttpHeaders } from '@angular/common/http';
 export class KategorieComponent implements OnInit {
   user: User = User.getUser();
   kategorien: Kategorie[] = [];
+  kategorieDetail: KategorieDetail;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.user = User.getUser();
+    this.kategorieDetail = KategorieDetail.kategorieDetail;
+
   }
 
   ngOnInit() {
@@ -46,4 +51,10 @@ export class KategorieComponent implements OnInit {
       }
       );
   }
+
+  loadKategorieDetail(id: number) {
+    this.kategorieDetail.id_kategorie = id;
+    this.router.navigateByUrl("/details");
+  }
+
 }

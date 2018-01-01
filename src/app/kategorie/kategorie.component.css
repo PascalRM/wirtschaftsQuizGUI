@@ -1,13 +1,13 @@
 .kat_box{
   width: calc(33% - 4px);
-  height: 22vh;
+  height: 20vh;
   margin: 2px;
   float: left;
   text-align: center;
-  line-height: 20vh;
+  line-height: 16vh;
 }
 
-.kat_box p {
+.kat_box h3 {
   display: inline-block;
   vertical-align: middle;
 }

@@ -3,17 +3,35 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Http } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { KategorieComponent } from './kategorie/kategorie.component';
+import { KategorieDetailComponent } from './kategorie-detail/kategorie-detail.component';
+
+const appRoutes: Routes = [
+  { path: 'home', component: LoginComponent },
+  { path: 'kategorie', component: KategorieComponent },
+  { path: 'details', component: KategorieDetailComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+];
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    KategorieComponent
+    KategorieComponent,
+    KategorieDetailComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
     HttpClientModule,
     HttpModule
