@@ -44,8 +44,6 @@ export class KategorieComponent implements OnInit {
           kat.ersteller = element.id_user
           this.kategorien.push(kat);
         });
-        console.log(data);
-        console.log(this.kategorien);
       }, err => {
         console.log("login failed");
       }

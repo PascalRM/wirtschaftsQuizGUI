@@ -1,3 +1,11 @@
-<p>
-  kategorie-detail id: {{kategorieDetail.id_kategorie}}
-</p>
+<div class="container">
+  <h2>
+    Kategorie
+  </h2>
+  <hr>
+  <div class="well kat_box" *ngFor="let fragebog of fragebogen">
+    <h3>
+      {{ fragebog.name }}
+    </h3>
+  </div>
+</div>
