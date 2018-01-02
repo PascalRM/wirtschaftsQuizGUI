@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { KategorieComponent } from './kategorie/kategorie.component';
 import { KategorieDetailComponent } from './kategorie-detail/kategorie-detail.component';
+import { FragebogenComponent } from './fragebogen/fragebogen.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: LoginComponent },
   { path: 'kategorie', component: KategorieComponent },
   { path: 'details', component: KategorieDetailComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'fragebogen', component: FragebogenComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     KategorieComponent,
-    KategorieDetailComponent
+    KategorieDetailComponent,
+    FragebogenComponent
   ],
   imports: [
     RouterModule.forRoot(

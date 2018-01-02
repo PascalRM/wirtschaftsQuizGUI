@@ -3,7 +3,7 @@
     Kategorien
   </h2>
   <hr>
-  <div class="well kat_box" *ngFor="let kategorie of kategorien" (click)="loadKategorieDetail(kategorie.id)">
+  <div class="well kat_box" *ngFor="let kategorie of kategorien" (click)="loadKategorieDetail(kategorie.id,kategorie)">
     <h3>
       {{ kategorie.name }}
     </h3>

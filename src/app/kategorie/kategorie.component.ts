@@ -50,8 +50,9 @@ export class KategorieComponent implements OnInit {
       );
   }
 
-  loadKategorieDetail(id: number) {
+  loadKategorieDetail(id: number,kategorie:Kategorie) {
     this.kategorieDetail.id_kategorie = id;
+    this.kategorieDetail.kategorie = kategorie;
     this.router.navigateByUrl("/details");
   }
 

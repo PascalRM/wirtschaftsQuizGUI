@@ -1,9 +1,9 @@
 <div class="container">
   <h2>
-    Kategorie
+    Kategorie - {{kategorieDetail.kategorie.name}}
   </h2>
   <hr>
-  <div class="well kat_box" *ngFor="let fragebog of fragebogen">
+  <div class="well kat_box" *ngFor="let fragebog of fragebogen" (click)="setFragebogen(fragebog.id,fragebog)">
     <h3>
       {{ fragebog.name }}
     </h3>

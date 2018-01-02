@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { KategorieDetail } from '../kategorie_detail.model';
 import { Fragebogen } from '../fragebogen.model';
+import { FragebogenDetail } from '../fragebogen_detail.model';
 
 @Component({
   selector: 'app-kategorie-detail',
@@ -67,5 +68,9 @@ export class KategorieDetailComponent implements OnInit {
     return this.username;
   }
 
-
+  setFragebogen(id:number, fragebogen: Fragebogen) {
+    FragebogenDetail.fragebogenDetail.id_fragebogen = id;
+    FragebogenDetail.fragebogenDetail.fragebogen = fragebogen;
+    this.router.navigateByUrl("/fragebogen");
+  }
 }
