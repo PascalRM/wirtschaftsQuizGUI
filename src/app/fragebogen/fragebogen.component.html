@@ -1,4 +1,11 @@
 <div class="container">
   <h2>Fragebogen - {{fragebogen.name}}</h2>
   <hr>
+  <button type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
+  <hr>
+  <div class="well" *ngFor="let frage of fragen" >
+      <h3>
+        {{ frage.frage }}
+      </h3>
+    </div>
 </div>
