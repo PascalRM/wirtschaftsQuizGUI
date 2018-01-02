@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { KategorieComponent } from './kategorie/kategorie.component';
 import { KategorieDetailComponent } from './kategorie-detail/kategorie-detail.component';
 import { FragebogenComponent } from './fragebogen/fragebogen.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: LoginComponent },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     LoginComponent,
     KategorieComponent,
     KategorieDetailComponent,
-    FragebogenComponent
+    FragebogenComponent,
+    QuizComponent
   ],
   imports: [
     RouterModule.forRoot(
