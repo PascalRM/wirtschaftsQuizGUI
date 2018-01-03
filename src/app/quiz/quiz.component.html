@@ -4,9 +4,11 @@
   </h2>
   <hr>
 
+
+  <button id="start" type="button" class="btn btn-success" (click)="starten()">Start</button>
   <div>
     <p id="frage">
-      {{frage.frage}}
+      {{frage.frage}}  ID:{{frage.id}}
     </p>
     <div id="antwort">
       <input id="textfeld" (input)="textfeld = $event.target.value" type="text">
@@ -22,7 +24,7 @@
       </div>
 
       <div id="wahrfalsch">
-        <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)"> wahr
+        <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)">wahr
         <br>
         <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
         <br>

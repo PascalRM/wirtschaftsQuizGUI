@@ -54,6 +54,7 @@ export class FragebogenComponent implements OnInit {
   }
 
   start() {
+    console.log(this.fragen);
     for (let i = 0; i < this.fragen.length; i++) {
       let url;
       let typ = this.fragen[i].typ;
@@ -75,7 +76,13 @@ export class FragebogenComponent implements OnInit {
       this.http
         .get(url)
         .subscribe((element: any) => {
+          try{
+
           this.fragen[i].antwort = element.antwort;
+          console.log(i + "|" + this.fragen[i].id +  " | " + this.fragen[i].frage + " | " +  this.fragen[i].typ +  " " + element.antwort);
+          }catch(exp){
+            alert(exp + " , " + this.fragen[i] + " , " + i)
+          }
           if (typ == 1) {
             this.fragen[i].falscheAntworten.push(element.falscheantwort1);
             this.fragen[i].falscheAntworten.push(element.falscheantwort2);

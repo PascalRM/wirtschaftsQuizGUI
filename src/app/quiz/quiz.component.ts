@@ -35,10 +35,10 @@ export class QuizComponent implements OnInit, AfterViewInit {
   textfeld: string = "";
 
   //Radiobutton werte
-  radio1: string = "1";
-  radio2: string = "2";
-  radio3: string = "3";
-  radio4: string = "4";
+  radio1: string = "";
+  radio2: string = "";
+  radio3: string = "";
+  radio4: string = "";
 
   //Wert von ausgewählten radio button
   wertRadiobtn: string = "";
@@ -48,16 +48,20 @@ export class QuizComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogenDeatil = FragebogenDetail.fragebogenDetail;
-    this.fragenAusstehend = this.fragebogenDeatil.fragen;
   }
 
   ngOnInit() {
     this.load();
-    this.naechsteFrage();
     console.log(this.fragenAusstehend);
   }
 
   ngAfterViewInit() {
+  }
+
+  starten(){
+    document.getElementById('start').style.display = "none";
+    this.fragenAusstehend = this.fragebogenDeatil.fragen;
+    this.naechsteFrage();
   }
 
   naechsteFrage() {
@@ -70,6 +74,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
     }
     this.result = "";
 
+    //Es wird ermittelt um welchen Fragetyp ees sich handelt und die dazugehörigen Eingabemöglickeiten werden angezeigt
     switch (this.frage.typ) {
 
       //Multiplechoice
@@ -81,6 +86,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
         let richtigeAntwort = this.getRandomInt(1, 4);
 
         console.log(richtigeAntwort);
+        //Die richtige Anwort wird gesetzt
         switch (richtigeAntwort) {
           case 1:
             this.radio1 = this.frage.antwort;
@@ -141,19 +147,38 @@ export class QuizComponent implements OnInit, AfterViewInit {
     switch (this.frage.typ) {
       //Multiplechoice
       case 1:
-        if(this.frage.antwort == this.wertRadiobtn){
+        if (this.frage.antwort == this.wertRadiobtn) {
           this.result = "richtig";
-        }else{
+        } else {
           this.result = "falsch";
         }
         break;
 
       //Eingabe
       case 2:
+        if (this.frage.antwort.toLowerCase() == this.textfeld.toLowerCase()) {
+          this.result = "richtig";
+        } else {
+          this.result = "falsch";
+        }
         break;
 
       //Wahrfalsch
       case 3:
+        let antowrtBoolean: string;
+
+        if (this.wertRadiobtn == "wahr") {
+          antowrtBoolean = "true";
+        } else {
+          antowrtBoolean = "false";
+        }
+
+        if (this.frage.antwort.toString() == antowrtBoolean.toLowerCase()) {
+
+          this.result = "richtig";
+        } else {
+          this.result = "falsch";
+        }
         break;
       default:
         console.log("Fehler: switch");
@@ -168,6 +193,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
     } else {
       document.getElementById('textfeld').style.display = "none";
       document.getElementById('radiobutton').style.display = "none";
+      document.getElementById('wahrfalsch').style.display = "none";
     }
   }
 
