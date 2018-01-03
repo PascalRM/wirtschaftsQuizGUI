@@ -6,27 +6,40 @@
 
 
   <button id="start" type="button" class="btn btn-success" (click)="starten()">Start</button>
-  <div>
+
+  <div id="quiz">
     <p id="frage">
-      {{frage.frage}}  ID:{{frage.id}}
+      {{frage.frage}} ID:{{frage.id}}
     </p>
     <div id="antwort">
       <input id="textfeld" (input)="textfeld = $event.target.value" type="text">
       <div id="radiobutton">
-        <input type="radio" name="gender" value="{{radio1}}" (change)="radioChangeHandler($event)"> {{radio1}}
+        <div id="radio1">
+          <input type="radio" name="gender" value="{{radio1}}" (change)="radioChangeHandler($event)"> {{radio1}}
+        </div>
         <br>
-        <input type="radio" name="gender" value="{{radio2}}" (change)="radioChangeHandler($event)"> {{radio2}}
+        <div id="radio2">
+          <input type="radio" name="gender" value="{{radio2}}" (change)="radioChangeHandler($event)"> {{radio2}}
+        </div>
         <br>
-        <input type="radio" name="gender" value="{{radio3}}" (change)="radioChangeHandler($event)"> {{radio3}}
+        <div id="radio3">
+          <input type="radio" name="gender" value="{{radio3}}" (change)="radioChangeHandler($event)"> {{radio3}}
+        </div>
         <br>
-        <input type="radio" name="gender" value="{{radio4}}" (change)="radioChangeHandler($event)"> {{radio4}}
+        <div id="radio4">
+          <input type="radio" name="gender" value="{{radio4}}" (change)="radioChangeHandler($event)"> {{radio4}}
+        </div>
         <br>
       </div>
 
       <div id="wahrfalsch">
-        <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)">wahr
+        <div id="wahr">
+          <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)">wahr
+        </div>
         <br>
-        <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
+        <div id="falsch">
+            <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
+        </div>
         <br>
       </div>
 
@@ -34,8 +47,21 @@
         {{result}}
       </p>
     </div>
-    <button type="button" class="btn btn-success" (click)="ueberpruefen()">Überprüfen</button>
-    <button type="button" class="btn btn-success" (click)="naechsteFrage()">Nächste Frage</button>
+    <button type="button" class="btn btn-success" (click)="ueberpruefen()" [disabled]="ueberpruefenKnopf">Überprüfen</button>
+    <button id="naechsteFrage" type="button" class="btn btn-success" (click)="naechsteFrage()" [disabled]="naechsteKnopf">Nächste Frage</button>
+    <br>
+    <p>
+      Richtige: {{anzRichtige}} | Falsche: {{anzFalsche}}
+    </p>
   </div>
 
+  <div id="resulat">
+    <p>
+      Richtige: {{anzRichtige}}
+    </p>
+    <p>
+      Falsche: {{anzFalsche}}
+    </p>
+    <button id="naechsteFrage" type="button" class="btn btn-success" (click)="wiederholen()">Wiederholen</button>
+  </div>
 </div>

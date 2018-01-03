@@ -25,11 +25,18 @@ import { Fragen } from '../fragen_detail.model';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
-export class QuizComponent implements OnInit, AfterViewInit {
+
+export class QuizComponent implements OnInit {
   fragebogenDeatil: FragebogenDetail; //Enthält den Fragebogen
   frage: Frage = new Frage; //Die aktuelle Frage
   fragenAusstehend: Frage[];
   fertig: boolean = false;
+
+  naechsteKnopf: boolean = true;
+  ueberpruefenKnopf: boolean = false;
+
+  anzRichtige: number = 0;
+  anzFalsche: number = 0;
 
   //Eingabefeld
   textfeld: string = "";
@@ -42,6 +49,8 @@ export class QuizComponent implements OnInit, AfterViewInit {
 
   //Wert von ausgewählten radio button
   wertRadiobtn: string = "";
+  //Enthält namen des Radiobuttons der die Richtige Antwort enthält
+  nameRadiobtn: string = "";
 
   //Ausgabe
   result: string = "";
@@ -52,23 +61,47 @@ export class QuizComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.load();
-    console.log(this.fragenAusstehend);
   }
 
-  ngAfterViewInit() {
-  }
-
-  starten(){
+  starten() {
     document.getElementById('start').style.display = "none";
-    this.fragenAusstehend = this.fragebogenDeatil.fragen;
+
+    document.getElementById('quiz').style.display = "";
+    this.fertig = false;
+
+    this.fragenAusstehend = this.fragebogenDeatil.fragen.slice(0);
+    console.log(this.fragenAusstehend);
     this.naechsteFrage();
   }
 
+  /*
+  *****************************************
+    Funtktion zum laden der nächsten Frage
+  *****************************************
+  */
+
   naechsteFrage() {
+    document.getElementById('naechsteFrage').classList.add("disabled");
+
+    document.getElementById('radio1').classList.remove("green");
+    document.getElementById('radio2').classList.remove("green");
+    document.getElementById('radio3').classList.remove("green");
+    document.getElementById('radio4').classList.remove("green");
+    document.getElementById('textfeld').classList.remove('green');
+    document.getElementById('wahr').classList.remove('green');
+    document.getElementById('falsch').classList.remove('green');
+
+    this.ueberpruefenKnopf = false;
+    this.naechsteKnopf = true;
+
     //Frage wird aus dem Array ausgelesen und aus dem Array entfernt
-    console.log("Ausstehend:" + this.fragenAusstehend.length);
     if (this.fragenAusstehend.length == 0) {
       this.fertig = true;
+      this.resultatAnzeigen();
+      document.getElementById("naechsteFrage").textContent = "Nächste Frage";
+    } else if (this.fragenAusstehend.length == 1) {
+      document.getElementById("naechsteFrage").textContent = "Beenden";
+      this.frage = this.fragenAusstehend.pop();
     } else {
       this.frage = this.fragenAusstehend.pop();
     }
@@ -76,7 +109,6 @@ export class QuizComponent implements OnInit, AfterViewInit {
 
     //Es wird ermittelt um welchen Fragetyp ees sich handelt und die dazugehörigen Eingabemöglickeiten werden angezeigt
     switch (this.frage.typ) {
-
       //Multiplechoice
       case 1:
         document.getElementById('radiobutton').style.display = "";
@@ -90,24 +122,28 @@ export class QuizComponent implements OnInit, AfterViewInit {
         switch (richtigeAntwort) {
           case 1:
             this.radio1 = this.frage.antwort;
+            this.nameRadiobtn = "radio1";
             this.radio2 = this.frage.falscheAntworten[0];
             this.radio3 = this.frage.falscheAntworten[1];
             this.radio4 = this.frage.falscheAntworten[2];
             break;
           case 2:
             this.radio2 = this.frage.antwort;
+            this.nameRadiobtn = "radio2";
             this.radio1 = this.frage.falscheAntworten[0];
             this.radio3 = this.frage.falscheAntworten[1];
             this.radio4 = this.frage.falscheAntworten[2];
             break;
           case 3:
             this.radio3 = this.frage.antwort;
+            this.nameRadiobtn = "radio3";
             this.radio2 = this.frage.falscheAntworten[0];
             this.radio1 = this.frage.falscheAntworten[1];
             this.radio4 = this.frage.falscheAntworten[2];
             break;
           case 4:
             this.radio4 = this.frage.antwort;
+            this.nameRadiobtn = "radio4";
             this.radio2 = this.frage.falscheAntworten[0];
             this.radio3 = this.frage.falscheAntworten[1];
             this.radio1 = this.frage.falscheAntworten[2];
@@ -136,21 +172,27 @@ export class QuizComponent implements OnInit, AfterViewInit {
         console.log("Fehler: switch");
         break;
     }
-
-
-    console.log(this.textfeld)
   }
 
-  ueberpruefen() {
+  /*
+  *****************************************
+    Funtktion zur Überprüfung des Antworts
+  *****************************************
+  */
 
+  ueberpruefen() {
     //Eingabe
     switch (this.frage.typ) {
       //Multiplechoice
       case 1:
         if (this.frage.antwort == this.wertRadiobtn) {
           this.result = "richtig";
+          document.getElementById(this.nameRadiobtn).classList.add("green");
+
+          this.anzRichtige++;
         } else {
           this.result = "falsch";
+          this.anzFalsche++;
         }
         break;
 
@@ -158,8 +200,11 @@ export class QuizComponent implements OnInit, AfterViewInit {
       case 2:
         if (this.frage.antwort.toLowerCase() == this.textfeld.toLowerCase()) {
           this.result = "richtig";
+          document.getElementById('textfeld').classList.add('green');
+          this.anzRichtige++;
         } else {
           this.result = "falsch";
+          this.anzFalsche++;
         }
         break;
 
@@ -174,10 +219,12 @@ export class QuizComponent implements OnInit, AfterViewInit {
         }
 
         if (this.frage.antwort.toString() == antowrtBoolean.toLowerCase()) {
-
           this.result = "richtig";
+          document.getElementById(this.wertRadiobtn).classList.add('green');
+          this.anzRichtige++;
         } else {
           this.result = "falsch";
+          this.anzFalsche++;
         }
         break;
       default:
@@ -185,7 +232,19 @@ export class QuizComponent implements OnInit, AfterViewInit {
         break;
     }
 
+    if (this.result == "richtig") {
+      this.ueberpruefenKnopf = true;
+      this.naechsteKnopf = false;
+
+      document.getElementById('naechsteFrage').classList.remove("disabled");
+    }
   }
+
+  /*
+  *****************************************
+    Vorbereitungen werden getroffen
+  *****************************************
+  */
 
   load() {
     if (this.fragebogenDeatil.fragebogen == null) {
@@ -194,8 +253,29 @@ export class QuizComponent implements OnInit, AfterViewInit {
       document.getElementById('textfeld').style.display = "none";
       document.getElementById('radiobutton').style.display = "none";
       document.getElementById('wahrfalsch').style.display = "none";
+      document.getElementById('quiz').style.display = "none";
+      document.getElementById('resulat').style.display = "none";
     }
   }
+
+
+  resultatAnzeigen() {
+    document.getElementById('quiz').style.display = "none";
+    document.getElementById('resulat').style.display = "";
+  }
+
+  wiederholen() {
+
+    this.naechsteKnopf = true;
+    this.ueberpruefenKnopf = false;
+
+    this.anzRichtige = 0;
+    this.anzFalsche = 0;
+
+    document.getElementById('resulat').style.display = "none";
+    document.getElementById('start').style.display = "";
+  }
+
 
   radioChangeHandler(event: any) {
     this.wertRadiobtn = event.target.value;
