@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
-import { UserInterface} from '../login/user.interface';
+import { UserInterface } from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
-import {HttpModule, Http, Response} from '@angular/http';
+import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,10 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User = User.getUser();
+  user: User;
 
-  constructor(private http: HttpClient) {
-    this.user = User.getUser();
+  constructor(private http: HttpClient, private location: Location, private router: Router) {
+    this.user = User.user;
   }
 
   ngOnInit() {
@@ -35,24 +36,34 @@ export class LoginComponent implements OnInit {
       password: pwd
     }
 
-    var headers  = new HttpHeaders();
+    let user: User = new User();
+
+    var headers = new HttpHeaders();
     //headers.append('Accept','application/json');
     //headers.append('Content-Type','application/json');
 
     this.http
-    .post('https://arcane-escarpment-45624.herokuapp.com/api/login', data, {headers})
-    .subscribe((data : any) => {
-      console.log(data.data.api_token);
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/login', data, { headers })
+      .subscribe((data: any) => {
+        console.log(data.data.api_token);
 
-      this.user.id = data.data.id;
-      this.user.name = data.data.name;
-      this.user.email = data.data.email;
-      this.user.api_token = data.data.api_token;
-      this.user.loggedIn = true;
-    },err => {
+        user.id = data.data.id;
+        user.name = data.data.name;
+        user.email = data.data.email;
+        user.api_token = data.data.api_token;
+        user.loggedIn = true;
+      }, err => {
         console.log("login failed");
+      }, () => {
+        this.user = user;
+        User.user = user;
+
+        this.redirect();
       }
-    );
+      );
   }
 
+  redirect() {
+    this.router.navigateByUrl("/konto");
+  }
 }

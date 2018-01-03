@@ -30,10 +30,6 @@ export class KategorieComponent implements OnInit {
   }
 
   getKategorie() {
-    var headers = new HttpHeaders();
-    //headers.append('Accept','application/json');
-    //headers.append('Content-Type','application/json');
-
     this.http
       .get('https://arcane-escarpment-45624.herokuapp.com/api/kategorie')
       .subscribe((data: any) => {

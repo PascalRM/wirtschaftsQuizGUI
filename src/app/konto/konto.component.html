@@ -1,3 +1,23 @@
-<p>
-  konto works!
-</p>
+<div class="container">
+  <h2>Konto - {{user.name}}</h2>
+  <hr> token: {{user.api_token}}
+  <br> id: {{user.id}}
+  <hr>
+  <h4>Meine Kategorien</h4>
+  <hr>
+  <div class="well" *ngFor="let kategorie of kategorien">
+    {{ kategorie.name }}
+  </div>
+  <div class="well">
+    +
+  </div>
+  <hr>
+  <h4>Meine Fragebogen</h4>
+  <hr>
+  <div class="well" *ngFor="let fragebog of fragebogen">
+      {{ fragebog.name }}
+  </div>
+  <div class="well">
+    +
+  </div>
+</div>
