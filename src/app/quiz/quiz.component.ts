@@ -43,6 +43,9 @@ export class QuizComponent implements OnInit, AfterViewInit {
   //Wert von ausgewählten radio button
   wertRadiobtn: string = "";
 
+  //Ausgabe
+  result: string = "";
+
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogenDeatil = FragebogenDetail.fragebogenDetail;
     this.fragenAusstehend = this.fragebogenDeatil.fragen;
@@ -65,9 +68,10 @@ export class QuizComponent implements OnInit, AfterViewInit {
     } else {
       this.frage = this.fragenAusstehend.pop();
     }
-
+    this.result = "";
 
     switch (this.frage.typ) {
+
       //Multiplechoice
       case 1:
         document.getElementById('radiobutton').style.display = "";
@@ -132,10 +136,16 @@ export class QuizComponent implements OnInit, AfterViewInit {
   }
 
   ueberpruefen() {
+
     //Eingabe
     switch (this.frage.typ) {
       //Multiplechoice
       case 1:
+        if(this.frage.antwort == this.wertRadiobtn){
+          this.result = "richtig";
+        }else{
+          this.result = "falsch";
+        }
         break;
 
       //Eingabe
@@ -149,6 +159,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
         console.log("Fehler: switch");
         break;
     }
+
   }
 
   load() {

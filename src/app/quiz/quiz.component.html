@@ -22,15 +22,18 @@
       </div>
 
       <div id="wahrfalsch">
-          <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)"> wahr
-          <br>
-          <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
-          <br>
+        <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)"> wahr
+        <br>
+        <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
+        <br>
+      </div>
 
-        </div>
-
+      <p>
+        {{result}}
+      </p>
     </div>
-    <button type="button" class="btn btn-success" (click)="naechsteFrage()">Überprüfen</button>
+    <button type="button" class="btn btn-success" (click)="ueberpruefen()">Überprüfen</button>
+    <button type="button" class="btn btn-success" (click)="naechsteFrage()">Nächste Frage</button>
   </div>
 
 </div>
