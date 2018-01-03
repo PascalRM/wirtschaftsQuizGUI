@@ -87,7 +87,8 @@ export class FragebogenComponent implements OnInit {
         }
         );
 
-        Fragen.fragen.alleFragen = this.fragen;
+        FragebogenDetail.fragebogenDetail.fragen = this.fragen;
+        this.router.navigateByUrl("/quiz");
     }
   }
 

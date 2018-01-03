@@ -1,3 +1,36 @@
-<p>
-  quiz works!
-</p>
+<div class="container">
+  <h2>
+    Quiz - {{fragebogenDeatil.fragebogen.name}}
+  </h2>
+  <hr>
+
+  <div>
+    <p id="frage">
+      {{frage.frage}}
+    </p>
+    <div id="antwort">
+      <input id="textfeld" (input)="textfeld = $event.target.value" type="text">
+      <div id="radiobutton">
+        <input type="radio" name="gender" value="{{radio1}}" (change)="radioChangeHandler($event)"> {{radio1}}
+        <br>
+        <input type="radio" name="gender" value="{{radio2}}" (change)="radioChangeHandler($event)"> {{radio2}}
+        <br>
+        <input type="radio" name="gender" value="{{radio3}}" (change)="radioChangeHandler($event)"> {{radio3}}
+        <br>
+        <input type="radio" name="gender" value="{{radio4}}" (change)="radioChangeHandler($event)"> {{radio4}}
+        <br>
+      </div>
+
+      <div id="wahrfalsch">
+          <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)"> wahr
+          <br>
+          <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
+          <br>
+
+        </div>
+
+    </div>
+    <button type="button" class="btn btn-success" (click)="naechsteFrage()">Überprüfen</button>
+  </div>
+
+</div>

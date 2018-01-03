@@ -18,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'details', component: KategorieDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'fragebogen', component: FragebogenComponent },
+  { path: 'quiz', component: QuizComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
