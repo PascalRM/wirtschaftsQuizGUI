@@ -12,6 +12,7 @@ import { KategorieDetailComponent } from './kategorie-detail/kategorie-detail.co
 import { FragebogenComponent } from './fragebogen/fragebogen.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { KontoComponent } from './konto/konto.component';
+import { KontoFragebogenComponent } from './konto-fragebogen/konto-fragebogen.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: LoginComponent },
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     KategorieDetailComponent,
     FragebogenComponent,
     QuizComponent,
-    KontoComponent
+    KontoComponent,
+    KontoFragebogenComponent
   ],
   imports: [
     RouterModule.forRoot(
