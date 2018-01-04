@@ -34,9 +34,10 @@ export class FragebogenComponent implements OnInit {
     this.load();
   }
 
+  //Anpassen von 1 mit fragebogen.id
   getFragen() {
     this.http
-      .get('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen_frage/' + 1)
+      .get('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen_frage/' + this.fragebogen.id)
       .subscribe(async (data: any) => {
         data.forEach(element => {
           let frage: Frage = new Frage;

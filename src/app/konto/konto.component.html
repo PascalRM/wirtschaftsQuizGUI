@@ -14,7 +14,7 @@
   <hr>
   <h4>Meine Fragebogen</h4>
   <hr>
-  <div class="well" *ngFor="let fragebog of fragebogen">
+  <div class="well" *ngFor="let fragebog of fragebogen" (click)="setFragebogenDetail(fragebog)">
       {{ fragebog.name }}
   </div>
   <div class="well">

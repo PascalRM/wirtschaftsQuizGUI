@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
   user: User;
-
+  loginResultat: string;
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.user = User.user;
   }
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
         user.loggedIn = true;
       }, err => {
         console.log("login failed");
+        this.loginResultat = "Email oder Password falsch";
       }, () => {
         this.user = user;
         User.user = user;

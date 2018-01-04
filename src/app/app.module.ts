@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'fragebogen', component: FragebogenComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'konto', component: KontoComponent },
+  { path: 'konto/fragebogen', component: KontoFragebogenComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

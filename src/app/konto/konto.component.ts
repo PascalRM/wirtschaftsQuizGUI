@@ -1,7 +1,5 @@
 import {
-  Component, OnInit, ViewChild,
-  AfterViewInit,
-  ElementRef,
+  Component, OnInit,
   Input
 } from '@angular/core';
 import { UserInterface } from '../login/user.interface';
@@ -19,6 +17,7 @@ import { User } from '../user.model';
 import { Kategorie } from '../kategorie.model';
 import { Frage } from '../frage.model';
 import { Fragen } from '../fragen_detail.model';
+import { FragebogenComponent } from '../fragebogen/fragebogen.component';
 
 @Component({
   selector: 'app-konto',
@@ -78,6 +77,11 @@ export class KontoComponent implements OnInit {
         console.log("failed");
       }
       );
+  }
+
+  setFragebogenDetail(fragebog: Fragebogen){
+    FragebogenDetail.fragebogenDetail.fragebogen = fragebog;
+    this.router.navigateByUrl("/konto/fragebogen");
   }
 
   load() {

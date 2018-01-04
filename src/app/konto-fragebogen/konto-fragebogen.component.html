@@ -1,3 +1,8 @@
-<p>
-  konto-fragebogen works!
-</p>
+<div class="container">
+  <h2>Fragen - {{fragebogen.name}}</h2>
+  <hr>
+  <div class="well" *ngFor="let frage of fragen">
+      {{ frage.frage }}
+      <button type="button" class="btn btn-danger" (click)="deleteFrage(frage)">Löschen</button>
+  </div>
+</div>>
