@@ -5,7 +5,7 @@
   <hr>
   <h4>Meine Kategorien</h4>
   <hr>
-  <div class="well" *ngFor="let kategorie of kategorien">
+  <div class="well" *ngFor="let kategorie of kategorien" (click)="setKategorieDetail(kategorie)">
     {{ kategorie.name }}
   </div>
   <div class="well">
@@ -16,6 +16,7 @@
   <hr>
   <div class="well" *ngFor="let fragebog of fragebogen" (click)="setFragebogenDetail(fragebog)">
       {{ fragebog.name }}
+      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">Löschen</button>
   </div>
   <div class="well">
     +

@@ -31,7 +31,6 @@ export class KontoFragebogenComponent implements OnInit {
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogen = FragebogenDetail.fragebogenDetail.fragebogen;
     this.user = User.user;
-    alert(this.fragebogen.id + " " + this.fragebogen.name);
   }
 
   ngOnInit() {

@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Kategorie - {{kategorieDetail.kategorie.name}}</h2>
+  <hr>
+  <div class="well" *ngFor="let fragebog of fragebogen" (click)="setFragebogen(fragebog)">
+    <h3>
+      {{ fragebog.name }}
+      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">Löschen</button>
+    </h3>
+  </div>
+</div>

@@ -13,6 +13,7 @@ import { FragebogenComponent } from './fragebogen/fragebogen.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { KontoComponent } from './konto/konto.component';
 import { KontoFragebogenComponent } from './konto-fragebogen/konto-fragebogen.component';
+import { KontoKategorieComponent } from './konto-kategorie/konto-kategorie.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: LoginComponent },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'fragebogen', component: FragebogenComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'konto', component: KontoComponent },
+  { path: 'konto/kategorie', component: KontoKategorieComponent },
   { path: 'konto/fragebogen', component: KontoFragebogenComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     FragebogenComponent,
     QuizComponent,
     KontoComponent,
-    KontoFragebogenComponent
+    KontoFragebogenComponent,
+    KontoKategorieComponent
   ],
   imports: [
     RouterModule.forRoot(
