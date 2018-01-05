@@ -4,7 +4,20 @@
   <div class="well" *ngFor="let fragebog of fragebogen" (click)="setFragebogen(fragebog)">
     <h3>
       {{ fragebog.name }}
-      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">Löschen</button>
+      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)"><span class="glyphicon glyphicon-trash"></span></button>
     </h3>
   </div>
+  <div id="form_fragebogen" class="well form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
+        </div>
+        <div class="col-md-9">
+          <input name="nameK" #nameK class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="btn btn-success" style="width: 100%;" (click)="addFragebogen(nameK)">
+      +
+    </div>
 </div>

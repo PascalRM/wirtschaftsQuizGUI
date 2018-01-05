@@ -72,9 +72,38 @@ export class KontoKategorieComponent implements OnInit {
     this.router.navigateByUrl("/konto/fragebogen");
   }
 
+  addFragebogen(nameK: HTMLInputElement) {
+    if (document.getElementById('form_fragebogen').style.display == "none") {
+      document.getElementById('form_fragebogen').style.display = "block";
+    } else if (document.getElementById('form_fragebogen').style.display == "block") {
+      var data = {
+        name: nameK.value,
+        id_kategorie: this.kategorieDetail.id_kategorie,
+        id_user: this.user.id,
+      }
+      console.log(data);
+      var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+      this.http
+        .post('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen', data, { headers })
+        .subscribe((data: any) => {
+        }, err => {
+          console.log("login failed" +  " "+ err.value);
+        }, () => {
+          this.fragebogen = [];
+          this.getFragebogen();
+        }
+        );
+    }
+
+    console.log(nameK.value);
+
+  }
+
   load() {
     if (this.user.api_token == null) {
       this.router.navigateByUrl("/login");
     }
+
+    document.getElementById('form_fragebogen').style.display = "none";
   }
 }

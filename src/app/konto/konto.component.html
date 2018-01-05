@@ -5,20 +5,32 @@
   <hr>
   <h4>Meine Kategorien</h4>
   <hr>
-  <div class="well" *ngFor="let kategorie of kategorien" (click)="setKategorieDetail(kategorie)">
-    {{ kategorie.name }}
+
+  <div id="infoKategorie">
+
   </div>
-  <div class="well">
+
+  <div class="well" *ngFor="let kategorie of kategorien">
+    <span (click)="setKategorieDetail(kategorie)">{{ kategorie.name }}</span>
+    <button style="float:right;" type="button" class="btn btn-danger" (click)="getFragebogenfuerKategorie(kategorie)">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+  <div class="btn btn-success" style="width: 100%;">
     +
   </div>
+
   <hr>
   <h4>Meine Fragebogen</h4>
   <hr>
-  <div class="well" *ngFor="let fragebog of fragebogen" (click)="setFragebogenDetail(fragebog)">
-      {{ fragebog.name }}
-      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">Löschen</button>
+
+  <div id="infoFragebogen"></div>
+
+  <div class="well" *ngFor="let fragebog of fragebogen">
+    <span (click)="setFragebogenDetail(fragebog)">{{ fragebog.name }}</span>
+    <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
   </div>
-  <div class="well">
-    +
-  </div>
+
 </div>

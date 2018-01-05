@@ -3,6 +3,6 @@
   <hr>
   <div class="well" *ngFor="let frage of fragen">
       {{ frage.frage }}
-      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFrage(frage)">Löschen</button>
+      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFrage(frage)"><span class="glyphicon glyphicon-trash"></span></button>
   </div>
 </div>
