@@ -155,11 +155,27 @@ export class KontoComponent implements OnInit {
     }
   }
 
-  addFragebogen(name: HTMLInputElement){
-    if(document.getElementById('form_fragebogen').style.display == "none"){
-      document.getElementById('form_fragebogen').style.display = "block";
-    }else if(document.getElementById('form_fragebogen').style.display == "block"){
-      console.log();
+  addKategorie(nameK: HTMLInputElement) {
+    if (document.getElementById('form_Kategorie').style.display == "none") {
+      document.getElementById('form_Kategorie').style.display = "block";
+    } else if (document.getElementById('form_Kategorie').style.display == "block") {
+      var data = {
+        kategorie: nameK.value,
+        id_user: this.user.id,
+      }
+      console.log(nameK.value)
+      var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+      this.http
+        .post('https://arcane-escarpment-45624.herokuapp.com/api/kategorie', data, { headers })
+        .subscribe((data: any) => {
+        }, err => {
+          console.log("Failed" +  " "+ err.value);
+        }, () => {
+          this.kategorien = [];
+          this.getKategorie();
+          document.getElementById('form_Kategorie').style.display = "none";
+        }
+        );
     }
   }
 
@@ -167,5 +183,6 @@ export class KontoComponent implements OnInit {
     if (this.user.api_token == null) {
       this.router.navigateByUrl("/login");
     }
+    document.getElementById('form_Kategorie').style.display = "none";
   }
 }
