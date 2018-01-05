@@ -2,7 +2,90 @@
   <h2>Fragen - {{fragebogen.name}}</h2>
   <hr>
   <div class="well" *ngFor="let frage of fragen">
-      {{ frage.frage }}
-      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFrage(frage)"><span class="glyphicon glyphicon-trash"></span></button>
+    {{ frage.frage }}
+    <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFrage(frage)">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
   </div>
+  <div id="form_frage" class="well form-group">
+    <div id="radiobutton" class="row">
+      <div id="radio1" class="col-md-3">
+        <label class=" col-form-label">Typ</label>
+      </div>
+      <div id="radio1" class="col-md-3">
+        <input name="typ" type="radio" value="Multiplechoice" (change)="radioChangeHandler($event)"> Multiplechoice
+      </div>
+      <div id="radio2" class="col-md-3">
+        <input name="typ" type="radio" value="Eingabe" (change)="radioChangeHandler($event)"> Eingabe
+      </div>
+      <div id="radio3" class="col-md-3">
+        <input name="typ" type="radio" value="WahrFalsch" (change)="radioChangeHandler($event)"> Wahr / Falsch
+      </div>
+      <br>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <label class=" col-form-label">Frage</label>
+      </div>
+      <div class="col-md-9">
+        <input name="frage" #frage class="form-control" type="text">
+      </div>
+    </div>
+    <br>
+    <div id="antwortEingabe" class="row">
+      <div class="col-md-3">
+        <label class=" col-form-label">Antwort</label>
+      </div>
+      <div class="col-md-9">
+        <input name="antwort" #antwort class="form-control" type="text">
+      </div>
+    </div>
+    <div id="antwortWahrfalsch" class="row">
+      <div class="col-md-3">
+        <label class=" col-form-label">Antwort</label>
+      </div>
+      <div class="col-md-4">
+        <input name="wahrfalsch" type="radio" value="Wahr" (change)="radioChangeHandlerWahrfalsch($event)">Wahr
+      </div>
+      <div class="col-md-4">
+        <input name="wahrfalsch" type="radio" value="Falsch" (change)="radioChangeHandlerWahrfalsch($event)">Falsch
+      </div>
+    </div>
+    <br>
+    <div id="FalscheAntworten">
+      <div class="row">
+        <div class="col-md-3">
+          <label class=" col-form-label">Falsche Antwort 1</label>
+        </div>
+        <div class="col-md-9">
+          <input name="antwort" #f1 class="form-control" type="text">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+          <label class=" col-form-label">Falsche Antwort 2</label>
+        </div>
+        <div class="col-md-9">
+          <input name="antwort" #f2  class="form-control" type="text">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+          <label class=" col-form-label">Falsche Antwort 3</label>
+        </div>
+        <div class="col-md-9">
+          <input name="antwort" #f3 class="form-control" type="text">
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="btn btn-success" style="width: 100%;" (click)="addFrage(frage,antwort,f1,f2,f3)">
+    +
+  </div>
+  <br>
 </div>

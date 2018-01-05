@@ -279,7 +279,6 @@ export class QuizComponent implements OnInit {
 
   radioChangeHandler(event: any) {
     this.wertRadiobtn = event.target.value;
-    console.log(this.wertRadiobtn)
   }
 
   getRandomInt(min, max) {

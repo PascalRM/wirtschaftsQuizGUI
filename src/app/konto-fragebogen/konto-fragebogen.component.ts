@@ -27,6 +27,8 @@ export class KontoFragebogenComponent implements OnInit {
   user: User;
   fragebogen: Fragebogen;
   fragen: Frage[] = [];
+  wertRadiobtn: string = "";
+  wertRadiobtn_antwort: boolean;
 
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogen = FragebogenDetail.fragebogenDetail.fragebogen;
@@ -73,11 +75,76 @@ export class KontoFragebogenComponent implements OnInit {
       );
   }
 
+  addFrage(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
+    if (document.getElementById("form_frage").style.display == "none") {
+      document.getElementById("form_frage").style.display = "block";
+    } else if (document.getElementById("form_frage").style.display == "block") {
+      //Frage hinzufügen
+      console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
+      console.log(this.addMultiplechoice(antwort.value,f1.value,f2.value,f3.value));
+    }
+
+  }
+
+  addMultiplechoice(antwortR, falsch1, falsch2, falsch3) {
+    //Antwort hinzufügen
+    let ans;
+    var data = {
+      antwort: antwortR,
+      falscheantwort1: falsch1,
+      falscheantwort2: falsch2,
+      falscheantwort3: falsch3,
+    }
+
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/multiplechoice', data, { headers })
+      .subscribe((data: any) => {
+        ans = data;
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+
+      }
+      );
+  }
+
+  radioChangeHandler(event: any) {
+    this.wertRadiobtn = event.target.value;
+    console.log(this.wertRadiobtn)
+    if (this.wertRadiobtn == "Multiplechoice") {
+      document.getElementById("antwortEingabe").style.display = "block";
+      document.getElementById("FalscheAntworten").style.display = "block";
+      document.getElementById("antwortWahrfalsch").style.display = "none";
+    } else if (this.wertRadiobtn == "Eingabe") {
+      document.getElementById("antwortEingabe").style.display = "block";
+      document.getElementById("FalscheAntworten").style.display = "none";
+      document.getElementById("antwortWahrfalsch").style.display = "none";
+    } else if (this.wertRadiobtn == "WahrFalsch") {
+      document.getElementById("antwortEingabe").style.display = "none";
+      document.getElementById("FalscheAntworten").style.display = "none";
+      document.getElementById("antwortWahrfalsch").style.display = "block";
+    }
+  }
+
+  radioChangeHandlerWahrfalsch(event: any) {
+    if (event.target.value == "Wahr") {
+      this.wertRadiobtn_antwort = true;
+    } else if (event.target.value == "Falsch") {
+      this.wertRadiobtn_antwort = false;
+    }
+  }
+
   load() {
     if (this.fragebogen == null) {
       this.router.navigateByUrl("/home");
-    } else {
-      this.getFragen();
     }
+    this.getFragen();
+
+    document.getElementById("form_frage").style.display = "none";
+
+    document.getElementById("antwortEingabe").style.display = "none";
+    document.getElementById("FalscheAntworten").style.display = "none";
+    document.getElementById("antwortWahrfalsch").style.display = "none";
   }
 }
