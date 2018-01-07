@@ -29,6 +29,7 @@ export class KontoFragebogenComponent implements OnInit {
   fragen: Frage[] = [];
   wertRadiobtn: string = "";
   wertRadiobtn_antwort: boolean;
+  frage: string = "";
 
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogen = FragebogenDetail.fragebogenDetail.fragebogen;
@@ -45,6 +46,7 @@ export class KontoFragebogenComponent implements OnInit {
     this.http
       .get('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen_frage/' + this.fragebogen.id)
       .subscribe(async (data: any) => {
+        this.fragen = [];
         data.forEach(element => {
           let frage: Frage = new Frage;
           frage.frage = element.frage;
@@ -58,6 +60,7 @@ export class KontoFragebogenComponent implements OnInit {
         console.log("failed");
       }
       );
+    console.log(this.fragen);
   }
 
   deleteFrage(frage: Frage) {
@@ -75,13 +78,14 @@ export class KontoFragebogenComponent implements OnInit {
       );
   }
 
-  addFrage(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
+  addFrageAntwort(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
     if (document.getElementById("form_frage").style.display == "none") {
       document.getElementById("form_frage").style.display = "block";
     } else if (document.getElementById("form_frage").style.display == "block") {
       //Frage hinzufügen
       console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
-      console.log(this.addMultiplechoice(antwort.value,f1.value,f2.value,f3.value));
+      this.frage = fragee.value;
+      console.log(this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value));
     }
 
   }
@@ -104,7 +108,27 @@ export class KontoFragebogenComponent implements OnInit {
       }, err => {
         console.log("Failed" + " " + err.value);
       }, () => {
+        this.addFrage(ans.id, this.frage, 1);
+      }
+      );
+  }
 
+  addFrage(idantwort: number, fragestr: string, typnumb: number) {
+    var data = {
+      frage: fragestr,
+      typ: typnumb,
+      id_antwort: idantwort,
+      id_fragebogen: this.fragebogen.id,
+    }
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/frage', data, { headers })
+      .subscribe((data: any) => {
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+        this.fragen = [];
+        this.getFragen();
       }
       );
   }
