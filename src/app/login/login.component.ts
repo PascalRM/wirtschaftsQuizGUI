@@ -64,6 +64,10 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  routeRegistrieren() {
+    //
+  }
+
   redirect() {
     this.router.navigateByUrl("/konto");
   }

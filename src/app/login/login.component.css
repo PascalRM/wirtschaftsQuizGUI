@@ -1,0 +1,67 @@
+#content{
+  padding-top: 25px;
+}
+#header{
+  padding-top: 20vh;
+}
+
+/*
+  ------------
+    Navbar
+  ------------
+*/
+.nav, .navbar{
+  background-color: #0bc1bd;
+}
+.navbar-header > .navbar-brand{
+  font-size: 40px;
+  color: white;
+  margin-top: 7px;
+}
+
+h1{
+  font-size: 65px;
+}
+p{
+  font-size: 20px;
+}
+
+/*
+  ------------
+    Button
+  ------------
+*/
+
+#registrieren{
+  color: white;
+  font-size: 15px;
+  border-radius: 0px;
+  border-color: #2f528f;
+  background-color: #4472c4;
+}
+
+#loginBtn{
+  font-size: 20px;
+  border-radius: 0px;
+  border-color: #4472c4;
+  background-color: #0bc1bd;
+}
+
+/*
+  ------------
+    Login
+  ------------
+*/
+
+#login{
+  padding-top: 20vh;
+}
+input{
+  padding-top: 6px;
+}
+.col-md-6 > input{
+  width: 100%;
+}
+.col-md-6 > button{
+  width: 100%;
+}

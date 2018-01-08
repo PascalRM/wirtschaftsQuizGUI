@@ -136,6 +136,21 @@ export class KontoComponent implements OnInit {
     }
   }
 
+  deleteFragebogen(fragebog: Fragebogen) {
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .delete('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen/' + fragebog.id, { headers })
+      .subscribe(async (data: any) => {
+      }, err => {
+        console.log("failed");
+        document.getElementById("infoKategorie").innerHTML = '<div id="fehlerFragebogen" class="alert alert-danger alert-dismissable" ><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Dieser Fragebogen konnte nicht gelöscht werden</div>';
+      }, () => {
+        this.fragebogen = [];
+        this.getFragebogen();
+      }
+      );
+  }
+
   addKategorie(nameK: HTMLInputElement) {
     if (document.getElementById('form_Kategorie').style.display == "none") {
       document.getElementById('form_Kategorie').style.display = "block";
