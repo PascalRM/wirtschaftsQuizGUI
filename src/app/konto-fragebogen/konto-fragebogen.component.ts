@@ -85,7 +85,15 @@ export class KontoFragebogenComponent implements OnInit {
       //Frage hinzufügen
       console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
       this.frage = fragee.value;
-      console.log(this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value));
+      if(this.wertRadiobtn == "Multiplechoice" ){
+        this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value);
+      }else if(this.wertRadiobtn == "Eingabe"){
+        this.addEingabe(antwort.value);
+      }else if(this.wertRadiobtn == "WahrFalsch"){
+        this.addWahrfalsch();
+      }
+
+      console.log();
     }
 
   }
@@ -113,6 +121,47 @@ export class KontoFragebogenComponent implements OnInit {
       );
   }
 
+  addEingabe(antwortR) {
+    //Antwort hinzufügen
+    let ans;
+    var data = {
+      antwort: antwortR,
+    }
+
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/eingabe', data, { headers })
+      .subscribe((data: any) => {
+        ans = data;
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+        this.addFrage(ans.id, this.frage, 2);
+      }
+      );
+  }
+
+  addWahrfalsch() {
+    //Antwort hinzufügen
+    let ans;
+    var data = {
+      antwort: this.wertRadiobtn_antwort,
+    }
+
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/truefalse', data, { headers })
+      .subscribe((data: any) => {
+        ans = data;
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+        this.addFrage(ans.id, this.frage, 3);
+      }
+      );
+  }
+  
+
   addFrage(idantwort: number, fragestr: string, typnumb: number) {
     var data = {
       frage: fragestr,
@@ -127,8 +176,7 @@ export class KontoFragebogenComponent implements OnInit {
       }, err => {
         console.log("Failed" + " " + err.value);
       }, () => {
-        this.fragen = [];
-        this.getFragen();
+        this.load();
       }
       );
   }
