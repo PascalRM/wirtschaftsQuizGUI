@@ -1,0 +1,51 @@
+#content{
+    margin-top: 70px;
+  }
+#header{
+padding-top: 20vh;
+}
+
+/*
+------------
+    Navbar
+------------
+*/
+.nav, .navbar{
+    background-color: #0bc1bd;
+}
+.navbar-header > .navbar-brand{
+    font-size: 40px;
+    color: white;
+    margin-top: 7px;
+}
+.nav li {
+    margin-top: 20px;
+    font-size: 15px;
+    color:white;
+}
+
+h1{
+font-size: 65px;
+}
+/*
+------------
+    Boxen
+------------
+*/
+
+.glyphicon-trash{
+    color: black;
+}
+
+.form_frage{
+    position: absolute;
+}
+
+/*
+------------
+    Button
+------------
+*/
+#btn_add{
+    margin-bottom: 10px;
+}

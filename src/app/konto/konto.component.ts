@@ -152,26 +152,42 @@ export class KontoComponent implements OnInit {
   }
 
   addKategorie(nameK: HTMLInputElement) {
+    var data = {
+      kategorie: nameK.value,
+      id_user: this.user.id,
+    }
+    console.log(nameK.value)
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/kategorie', data, { headers })
+      .subscribe((data: any) => {
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+        this.kategorien = [];
+        this.getKategorie();
+        document.getElementById('form_Kategorie').style.display = "none";
+
+        document.getElementById('form_Kategorie').style.display = "none";
+        document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+        document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+        document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
+      }
+      );
+
+  }
+
+  openAddKategorie() {
     if (document.getElementById('form_Kategorie').style.display == "none") {
       document.getElementById('form_Kategorie').style.display = "block";
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.add("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#d9534f';
     } else if (document.getElementById('form_Kategorie').style.display == "block") {
-      var data = {
-        kategorie: nameK.value,
-        id_user: this.user.id,
-      }
-      console.log(nameK.value)
-      var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
-      this.http
-        .post('https://arcane-escarpment-45624.herokuapp.com/api/kategorie', data, { headers })
-        .subscribe((data: any) => {
-        }, err => {
-          console.log("Failed" +  " "+ err.value);
-        }, () => {
-          this.kategorien = [];
-          this.getKategorie();
-          document.getElementById('form_Kategorie').style.display = "none";
-        }
-        );
+      document.getElementById('form_Kategorie').style.display = "none";
+      document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
     }
   }
 

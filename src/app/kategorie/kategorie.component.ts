@@ -51,5 +51,13 @@ export class KategorieComponent implements OnInit {
     this.kategorieDetail.kategorie = kategorie;
     this.router.navigateByUrl("/details");
   }
+  
+  routeLogin(){
+    this.router.navigateByUrl("/login");
+  }
+
+  routeRegistrieren(){
+    //
+  }
 
 }

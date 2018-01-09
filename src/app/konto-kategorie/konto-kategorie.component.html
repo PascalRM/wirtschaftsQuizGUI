@@ -1,14 +1,40 @@
-<div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Wirtschafsquiz</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            Hallo!,
+            <b>{{user.name}}</b>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+<div id="content" class="container">
   <h2>Kategorie - {{kategorieDetail.kategorie.name}}</h2>
   <hr>
   <div id="infoKategorie"></div>
-  <div class="well" *ngFor="let fragebog of fragebogen">
-    <h3>
+  <div class="well kat_box" *ngFor="let fragebog of fragebogen">
+    <div>
       <span (click)="setFragebogen(fragebog)">{{ fragebog.name }}</span>
-      <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFragebogen(fragebog)">
-        <span class="glyphicon glyphicon-trash"></span>
-      </button>
-    </h3>
+    </div>
+    <a style="float:right;position: absolute;top:15px;right:15px;color:white;" type="button" (click)="deleteFragebogen(fragebog)">
+      <span class="glyphicon glyphicon-trash"></span>
+    </a>
+  </div>
+  <div id="btn_add" class="well btn_add kat_box" (click)="openAddFragebogen()">
+      <div><span id="btn_add_logo" class="glyphicon glyphicon-plus"></span></div>
   </div>
   <div id="form_fragebogen" class="well form-group">
     <div class="row">
@@ -17,10 +43,8 @@
       </div>
       <div class="col-md-9">
         <input name="nameF" #nameF class="form-control" type="text">
+        <button style="float:right;margin-top: 5px;" class="btn btn-success" (click)="addFragebogen(nameF)">Hinzufügen</button>
       </div>
     </div>
-  </div>
-  <div class="btn btn-success" style="width: 100%;" (click)="addFragebogen(nameF)">
-    +
   </div>
 </div>

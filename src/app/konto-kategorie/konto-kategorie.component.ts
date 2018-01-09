@@ -71,31 +71,45 @@ export class KontoKategorieComponent implements OnInit {
     this.router.navigateByUrl("/konto/fragebogen");
   }
 
-  addFragebogen(nameF: HTMLInputElement) {
+  openAddFragebogen() {
     if (document.getElementById('form_fragebogen').style.display == "none") {
       document.getElementById('form_fragebogen').style.display = "block";
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.add("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#d9534f';
     } else if (document.getElementById('form_fragebogen').style.display == "block") {
-      var data = {
-        name: nameF.value,
-        id_kategorie: this.kategorieDetail.id_kategorie,
-        id_user: this.user.id,
-      }
-      console.log(data);
-      var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
-      this.http
-        .post('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen', data, { headers })
-        .subscribe((data: any) => {
-        }, err => {
-          console.log("Failed" + " " + err.value);
-        }, () => {
-          this.fragebogen = [];
-          this.getFragebogen();
-          document.getElementById('form_fragebogen').style.display = "none";
-          document.getElementById("infoKategorie").innerHTML = '<div id="erfolgFragebogen" class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Erfolg!</strong> Der Fragebogen wurde erstellt</div>';
-
-        }
-        );
+      document.getElementById('form_fragebogen').style.display = "none";
+      document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
     }
+  }
+
+  addFragebogen(nameF: HTMLInputElement) {
+    var data = {
+      name: nameF.value,
+      id_kategorie: this.kategorieDetail.id_kategorie,
+      id_user: this.user.id,
+    }
+    console.log(data);
+    var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
+    this.http
+      .post('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen', data, { headers })
+      .subscribe((data: any) => {
+      }, err => {
+        console.log("Failed" + " " + err.value);
+      }, () => {
+        this.fragebogen = [];
+        this.getFragebogen();
+        document.getElementById('form_fragebogen').style.display = "none";
+        document.getElementById("infoKategorie").innerHTML = '<div id="erfolgFragebogen" class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Erfolg!</strong> Der Fragebogen wurde erstellt</div>';
+
+        document.getElementById('form_fragebogen').style.display = "none";
+        document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+        document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+        document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
+      }
+      );
   }
 
   load() {

@@ -1,11 +1,34 @@
-<div class="container">
-  <h2>Fragen - {{fragebogen.name}}</h2>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Wirtschafsquiz</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <b>{{user.name}}</b>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+<div id="content" class="container">
+  <h2>Fragebogen - {{fragebogen.name}}</h2>
   <hr>
-  <div class="well" *ngFor="let frage of fragen">
+  <div *ngFor="let frage of fragen">
     {{ frage.frage }}
-    <button style="float:right;" type="button" class="btn btn-danger" (click)="deleteFrage(frage)">
+    <div style="float:right;" type="button" (click)="deleteFrage(frage)">
       <span class="glyphicon glyphicon-trash"></span>
-    </button>
+    </div>
+    <hr>
   </div>
   <div id="form_frage" class="well form-group">
     <div id="radiobutton" class="row">
@@ -68,7 +91,7 @@
           <label class=" col-form-label">Falsche Antwort 2</label>
         </div>
         <div class="col-md-9">
-          <input name="antwort" #f2  class="form-control" type="text">
+          <input name="antwort" #f2 class="form-control" type="text">
         </div>
       </div>
       <br>
@@ -82,10 +105,12 @@
       </div>
       <br>
     </div>
+    <br>
+    <button id="btn_addFrageAntwort" style="float:right;margin-top:-25px;" class="btn btn-success" (click)="addFrageAntwort(frage,antwort,f1,f2,f3)">Hinzufügen</button>
   </div>
 
-  <div class="btn btn-success" style="width: 100%;" (click)="addFrageAntwort(frage,antwort,f1,f2,f3)">
-    +
+  <div id="btn_add" class="btn btn-success" style="width: 100%;" (click)="openAddFrageAntwort()">
+    <span id="btn_add_logo" class="glyphicon glyphicon-plus"></span>
   </div>
   <br>
 </div>

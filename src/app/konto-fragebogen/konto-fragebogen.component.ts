@@ -78,24 +78,32 @@ export class KontoFragebogenComponent implements OnInit {
       );
   }
 
-  addFrageAntwort(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
+  openAddFrageAntwort() {
     if (document.getElementById("form_frage").style.display == "none") {
       document.getElementById("form_frage").style.display = "block";
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.add("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#d9534f';
+      window.scrollTo(0, document.body.scrollHeight);
     } else if (document.getElementById("form_frage").style.display == "block") {
-      //Frage hinzufügen
-      console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
-      this.frage = fragee.value;
-      if(this.wertRadiobtn == "Multiplechoice" ){
-        this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value);
-      }else if(this.wertRadiobtn == "Eingabe"){
-        this.addEingabe(antwort.value);
-      }else if(this.wertRadiobtn == "WahrFalsch"){
-        this.addWahrfalsch();
-      }
-
-      console.log();
+      document.getElementById("form_frage").style.display = "none";
+      document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+      document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+      document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
     }
+  }
 
+  addFrageAntwort(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
+    //Frage hinzufügen
+    console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
+    this.frage = fragee.value;
+    if (this.wertRadiobtn == "Multiplechoice") {
+      this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value);
+    } else if (this.wertRadiobtn == "Eingabe") {
+      this.addEingabe(antwort.value);
+    } else if (this.wertRadiobtn == "WahrFalsch") {
+      this.addWahrfalsch();
+    }
   }
 
   addMultiplechoice(antwortR, falsch1, falsch2, falsch3) {
@@ -160,7 +168,7 @@ export class KontoFragebogenComponent implements OnInit {
       }
       );
   }
-  
+
 
   addFrage(idantwort: number, fragestr: string, typnumb: number) {
     var data = {
@@ -177,6 +185,10 @@ export class KontoFragebogenComponent implements OnInit {
         console.log("Failed" + " " + err.value);
       }, () => {
         this.load();
+        document.getElementById("form_frage").style.display = "none";
+        document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
+        document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
+        document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
       }
       );
   }
@@ -188,14 +200,17 @@ export class KontoFragebogenComponent implements OnInit {
       document.getElementById("antwortEingabe").style.display = "block";
       document.getElementById("FalscheAntworten").style.display = "block";
       document.getElementById("antwortWahrfalsch").style.display = "none";
+      document.getElementById('btn_addFrageAntwort').style.display = "block";
     } else if (this.wertRadiobtn == "Eingabe") {
       document.getElementById("antwortEingabe").style.display = "block";
       document.getElementById("FalscheAntworten").style.display = "none";
       document.getElementById("antwortWahrfalsch").style.display = "none";
+      document.getElementById('btn_addFrageAntwort').style.display = "block";
     } else if (this.wertRadiobtn == "WahrFalsch") {
       document.getElementById("antwortEingabe").style.display = "none";
       document.getElementById("FalscheAntworten").style.display = "none";
       document.getElementById("antwortWahrfalsch").style.display = "block";
+      document.getElementById('btn_addFrageAntwort').style.display = "block";
     }
   }
 
@@ -217,6 +232,7 @@ export class KontoFragebogenComponent implements OnInit {
 
     document.getElementById("antwortEingabe").style.display = "none";
     document.getElementById("FalscheAntworten").style.display = "none";
-    document.getElementById("antwortWahrfalsch").style.display = "none";
+    document.getElementById("antwortWahrfalsch").style.display = "none";  
+    document.getElementById('btn_addFrageAntwort').style.display = "none";
   }
 }

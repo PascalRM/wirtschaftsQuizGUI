@@ -19,9 +19,10 @@ import { FragebogenDetail } from '../fragebogen_detail.model';
 export class KategorieDetailComponent implements OnInit {
   kategorieDetail: KategorieDetail;
   fragebogen: Fragebogen[] = [];
-  username: string = "";
+  user: User;
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.kategorieDetail = KategorieDetail.kategorieDetail;
+    this.user = User.user;
   }
 
   ngOnInit() {
@@ -44,7 +45,6 @@ export class KategorieDetailComponent implements OnInit {
           fragebog.id_kategorie = element.id_kategorie;
           fragebog.id_user = element.id_user;
           this.fragebogen.push(fragebog);
-          console.log(this.fragebogen);
         });
       }, err => {
         console.log("failed");
@@ -54,18 +54,6 @@ export class KategorieDetailComponent implements OnInit {
 
   redirectKategorie() {
     this.router.navigateByUrl("/kategorie");
-  }
-
-  getUserInfo(id: number): string {
-    this.http
-      .get('https://arcane-escarpment-45624.herokuapp.com/api/userinfo/' + id)
-      .subscribe(async (data: any) => {
-        this.username = data.name;
-        console.log("username. " + this.username);
-      }
-      );
-
-    return this.username;
   }
 
   setFragebogen(id:number, fragebogen: Fragebogen) {

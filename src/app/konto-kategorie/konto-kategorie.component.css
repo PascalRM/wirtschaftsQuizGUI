@@ -1,0 +1,98 @@
+#content{
+    margin-top: 70px;
+  }
+#header{
+padding-top: 20vh;
+}
+
+/*
+------------
+    Navbar
+------------
+*/
+.nav, .navbar{
+    background-color: #0bc1bd;
+}
+.navbar-header > .navbar-brand{
+    font-size: 40px;
+    color: white;
+    margin-top: 7px;
+}
+.nav li {
+    margin-top: 20px;
+    font-size: 15px;
+    color:white;
+}
+
+h1{
+font-size: 65px;
+}
+/*
+------------
+    Boxen
+------------
+*/
+
+#form_fragebogen{
+    clear: both;
+    margin-top: 5px;
+    margin-left: 2px;
+    margin-right: 2px;    
+}
+.kat_box{
+    width: calc(25% - 4px);
+    margin: 2px;
+    float: left;
+    position: relative;
+    background-color: #4472c4;
+    color: white;
+  }.kat_box:before {
+    content: "";
+    display: block;
+    padding-top: calc(100% - 4px);
+  }
+  .kat_box div {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 15px;
+}
+.kat_box span{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn_add{
+    background-color: #5cb85c;
+}
+
+/*
+------------
+    Button
+------------
+*/
+#login{
+background-color: transparent;
+border-color: transparent;
+color: white;
+margin-right: -15px;
+}
+#registrieren{
+color: white;
+font-size: 15px;
+border-radius: 0px;
+border-color: #2f528f;
+background-color: #4472c4;
+}
+#quiz{
+font-size: 30px;
+width: 250px;
+border-radius: 0px;
+border-color: #4472c4;
+background-color: #0bc1bd;
+}
