@@ -1,11 +1,42 @@
-<div class="container">
-  <h2>Fragebogen - {{fragebogen.name}}</h2>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Wirtschafsquiz</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="user.name != null">
+          <a><b>{{user.name}}</b></a>
+        </li>
+        <li *ngIf="user.name == null">
+          <a>
+            <button id="login" class="btn btn-default" (click)="routeLogin()">Login</button>
+          </a>
+        </li>
+        <li *ngIf="user.name == null">
+          <a>
+            <button id="registrieren" class="btn btn-default" (click)="routeRegistrieren()">Registrieren</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+<div id="content" class="container">
+  <h2>Fragebogen - {{fragebogen.name}}
+    <button style="float:right;" type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
+  </h2>
   <hr>
-  <button type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
-  <hr>
-  <div class="well" *ngFor="let frage of fragen">
-    <h3>
-      {{ frage.frage }}
-    </h3>
+  <div *ngFor="let frage of fragen">
+    {{ frage.frage }}
+    <hr>
   </div>
 </div>

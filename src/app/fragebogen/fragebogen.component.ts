@@ -24,10 +24,11 @@ export class FragebogenComponent implements OnInit {
 
   fragen: Frage[] = [];
   fragebogen: Fragebogen = new Fragebogen();
-
+  user: User;
 
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogen = FragebogenDetail.fragebogenDetail.fragebogen;
+    this.user = User.user;
   }
 
   ngOnInit() {
@@ -80,7 +81,7 @@ export class FragebogenComponent implements OnInit {
           try{
 
           this.fragen[i].antwort = element.antwort;
-          console.log(i + "|" + this.fragen[i].id +  " | " + this.fragen[i].frage + " | " +  this.fragen[i].typ +  " " + element.antwort);
+          //console.log(i + "|" + this.fragen[i].id +  " | " + this.fragen[i].frage + " | " +  this.fragen[i].typ +  " " + element.antwort);
           }catch(exp){
             alert(exp + " , " + this.fragen[i] + " , " + i)
           }

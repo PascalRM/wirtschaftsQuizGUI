@@ -18,7 +18,11 @@
   color: white;
   margin-top: 7px;
 }
-
+.nav li b{
+  margin-top: 20px;
+  font-size: 15px;
+  color:white;
+}
 h1{
   font-size: 65px;
 }
@@ -48,6 +52,7 @@ p{
   font-size: 30px;
   width: 250px;
   border-radius: 0px;
+  color: white;
   border-color: #4472c4;
   background-color: #0bc1bd;
 }

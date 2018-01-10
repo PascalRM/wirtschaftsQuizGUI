@@ -12,15 +12,15 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="user.name != null;notlogedIn">
-          <b>{{user.name}}</b>
+        <li *ngIf="user.name != null">
+          <a><b>{{user.name}}</b></a>
         </li>
-        <li #notlogedIn>
+        <li *ngIf="user.name == null">
           <a>
             <button id="login" class="btn btn-default" (click)="routeLogin()">Login</button>
           </a>
         </li>
-        <li #notlogedIn>
+        <li *ngIf="user.name == null">
           <a>
             <button id="registrieren" class="btn btn-default" (click)="routeRegistrieren()">Registrieren</button>
           </a>

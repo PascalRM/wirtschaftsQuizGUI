@@ -19,6 +19,7 @@ import { User } from '../user.model';
 import { Kategorie } from '../kategorie.model';
 import { Frage } from '../frage.model';
 import { Fragen } from '../fragen_detail.model';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-quiz',
@@ -31,6 +32,7 @@ export class QuizComponent implements OnInit {
   frage: Frage = new Frage; //Die aktuelle Frage
   fragenAusstehend: Frage[];
   fertig: boolean = false;
+  user: User;
 
   naechsteKnopf: boolean = true;
   ueberpruefenKnopf: boolean = false;
@@ -57,6 +59,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private http: HttpClient, private location: Location, private router: Router) {
     this.fragebogenDeatil = FragebogenDetail.fragebogenDetail;
+    this.user = User.user;
   }
 
   ngOnInit() {
@@ -65,6 +68,7 @@ export class QuizComponent implements OnInit {
 
   starten() {
     document.getElementById('start').style.display = "none";
+    document.getElementById('score').style.display = "";
 
     document.getElementById('quiz').style.display = "";
     this.fertig = false;
@@ -87,6 +91,11 @@ export class QuizComponent implements OnInit {
     document.getElementById('radio2').classList.remove("green");
     document.getElementById('radio3').classList.remove("green");
     document.getElementById('radio4').classList.remove("green");
+
+    (<HTMLFormElement>document.getElementById('form_radio')).reset();
+    (<HTMLFormElement>document.getElementById('form_wahrfalsch')).reset();
+    (<HTMLFormElement>document.getElementById('form_text')).reset();
+
     document.getElementById('textfeld').classList.remove('green');
     document.getElementById('wahr').classList.remove('green');
     document.getElementById('falsch').classList.remove('green');
@@ -187,11 +196,12 @@ export class QuizComponent implements OnInit {
       case 1:
         if (this.frage.antwort == this.wertRadiobtn) {
           this.result = "richtig";
+          document.getElementById("result").style.color = "#5cb85c";
           document.getElementById(this.nameRadiobtn).classList.add("green");
-
           this.anzRichtige++;
         } else {
           this.result = "falsch";
+          document.getElementById("result").style.color = "#d9534f";
           this.anzFalsche++;
         }
         break;
@@ -200,10 +210,12 @@ export class QuizComponent implements OnInit {
       case 2:
         if (this.frage.antwort.toLowerCase() == this.textfeld.toLowerCase()) {
           this.result = "richtig";
-          document.getElementById('textfeld').classList.add('green');
+          document.getElementById("result").style.color = "#5cb85c";
+          document.getElementById("textfeld").classList.add('green');
           this.anzRichtige++;
         } else {
           this.result = "falsch";
+          document.getElementById("result").style.color = "#d9534f";
           this.anzFalsche++;
         }
         break;
@@ -220,9 +232,11 @@ export class QuizComponent implements OnInit {
 
         if (this.frage.antwort.toString() == antowrtBoolean.toLowerCase()) {
           this.result = "richtig";
+          document.getElementById("result").style.color = "#5cb85c";
           document.getElementById(this.wertRadiobtn).classList.add('green');
           this.anzRichtige++;
         } else {
+          document.getElementById("result").style.color = "#d9534f";
           this.result = "falsch";
           this.anzFalsche++;
         }
@@ -238,6 +252,7 @@ export class QuizComponent implements OnInit {
 
       document.getElementById('naechsteFrage').classList.remove("disabled");
     }
+
   }
 
   /*
@@ -255,12 +270,14 @@ export class QuizComponent implements OnInit {
       document.getElementById('wahrfalsch').style.display = "none";
       document.getElementById('quiz').style.display = "none";
       document.getElementById('resulat').style.display = "none";
+      document.getElementById('score').style.display = "none";
     }
   }
 
 
   resultatAnzeigen() {
     document.getElementById('quiz').style.display = "none";
+    
     document.getElementById('resulat').style.display = "";
   }
 
@@ -272,6 +289,7 @@ export class QuizComponent implements OnInit {
     this.anzRichtige = 0;
     this.anzFalsche = 0;
 
+    document.getElementById('score').style.display = "none";
     document.getElementById('resulat').style.display = "none";
     document.getElementById('start').style.display = "";
   }

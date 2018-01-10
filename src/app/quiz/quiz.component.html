@@ -1,67 +1,102 @@
-<div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Wirtschafsquiz</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="user.name != null">
+          <a>
+            <b>{{user.name}}</b>
+          </a>
+        </li>
+        <li *ngIf="user.name == null">
+          <a>
+            <button id="login" class="btn btn-default" (click)="routeLogin()">Login</button>
+          </a>
+        </li>
+        <li *ngIf="user.name == null">
+          <a>
+            <button id="registrieren" class="btn btn-default" (click)="routeRegistrieren()">Registrieren</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+<div id="content" class="container">
   <h2>
     Quiz - {{fragebogenDeatil.fragebogen.name}}
   </h2>
   <hr>
+  <div class="outer">
+    <div class="middle">
+      <button id="start" type="button" class="btn btn-success" (click)="starten()">Start</button>
+      <div id="quiz" class="well">
+        <h3 id="frage">{{frage.frage}}</h3>
+        <div id="antwort">
+          <form id="form_text">
+            <input style="width: 80%;" id="textfeld" (input)="textfeld = $event.target.value" type="text">
+          </form>
+          <div style="text-align: left;padding-left: 10%;" id="radiobutton">
+            <form id="form_radio">
+              <input type="radio" name="gender" value="{{radio1}}" (change)="radioChangeHandler($event)">
+              <span class="radioBtn" id="radio1">{{radio1}}</span>
+              <br>
+              <input type="radio" name="gender" value="{{radio2}}" (change)="radioChangeHandler($event)">
+              <span class="radioBtn" id="radio2">{{radio2}}</span>
+              <br>
+              <input type="radio" name="gender" value="{{radio3}}" (change)="radioChangeHandler($event)">
+              <span class="radioBtn" id="radio3">{{radio3}}</span>
+              <br>
+              <input type="radio" name="gender" value="{{radio4}}" (change)="radioChangeHandler($event)">
+              <span class="radioBtn" id="radio4">{{radio4}}</span>
+              <br>
+            </form>
+          </div>
+
+          <div style="text-align: left;padding-left: 20%;" id="wahrfalsch">
+            <form id="form_wahrfalsch">
+              <div id="wahr">
+                <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)">wahr
+              </div>
+              <div id="falsch">
+                <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
+              </div>
+            </form>
+            <br>
+          </div>
 
 
-  <button id="start" type="button" class="btn btn-success" (click)="starten()">Start</button>
-
-  <div id="quiz">
-    <p id="frage">
-      {{frage.frage}} ID:{{frage.id}}
-    </p>
-    <div id="antwort">
-      <input id="textfeld" (input)="textfeld = $event.target.value" type="text">
-      <div id="radiobutton">
-        <div id="radio1">
-          <input type="radio" name="gender" value="{{radio1}}" (change)="radioChangeHandler($event)"> {{radio1}}
         </div>
         <br>
-        <div id="radio2">
-          <input type="radio" name="gender" value="{{radio2}}" (change)="radioChangeHandler($event)"> {{radio2}}
+        <div style="float:none;">
+          <button id="checkbtn" type="button" class="btn btn-success" (click)="ueberpruefen()" [disabled]="ueberpruefenKnopf">Überprüfen</button>
+          <button id="naechsteFrage" type="button" class="btn btn-success" (click)="naechsteFrage()" [disabled]="naechsteKnopf">Nächste Frage</button>
         </div>
         <br>
-        <div id="radio3">
-          <input type="radio" name="gender" value="{{radio3}}" (change)="radioChangeHandler($event)"> {{radio3}}
-        </div>
-        <br>
-        <div id="radio4">
-          <input type="radio" name="gender" value="{{radio4}}" (change)="radioChangeHandler($event)"> {{radio4}}
-        </div>
-        <br>
+        <p id="result">
+          {{result}}
+        </p>
       </div>
-
-      <div id="wahrfalsch">
-        <div id="wahr">
-          <input type="radio" name="gender" value="wahr" (change)="radioChangeHandler($event)">wahr
+      <div id="score" class="well">
+        <h4>Richtige: {{anzRichtige}}</h4>
+        <h4>Falsche: {{anzFalsche}}</h4>
+        <div id="resulat">
+          <button id="naechsteFrage" type="button" class="btn btn-success" (click)="wiederholen()">Wiederholen</button>
         </div>
-        <br>
-        <div id="falsch">
-            <input type="radio" name="gender" value="falsch" (change)="radioChangeHandler($event)">falsch
-        </div>
-        <br>
       </div>
-
-      <p>
-        {{result}}
-      </p>
     </div>
-    <button type="button" class="btn btn-success" (click)="ueberpruefen()" [disabled]="ueberpruefenKnopf">Überprüfen</button>
-    <button id="naechsteFrage" type="button" class="btn btn-success" (click)="naechsteFrage()" [disabled]="naechsteKnopf">Nächste Frage</button>
-    <br>
-    <p>
-      Richtige: {{anzRichtige}} | Falsche: {{anzFalsche}}
-    </p>
   </div>
 
-  <div id="resulat">
-    <p>
-      Richtige: {{anzRichtige}}
-    </p>
-    <p>
-      Falsche: {{anzFalsche}}
-    </p>
-    <button id="naechsteFrage" type="button" class="btn btn-success" (click)="wiederholen()">Wiederholen</button>
-  </div>
+
+
 </div>

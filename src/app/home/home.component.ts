@@ -8,6 +8,7 @@ import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private location: Location, private router: Router) { }
+  user: User;
+  constructor(private location: Location, private router: Router) { 
+    this.user = User.user;
+  }
 
   ngOnInit() {
   }
