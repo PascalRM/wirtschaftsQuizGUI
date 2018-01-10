@@ -15,6 +15,7 @@ import { KontoComponent } from './konto/konto.component';
 import { KontoFragebogenComponent } from './konto-fragebogen/konto-fragebogen.component';
 import { KontoKategorieComponent } from './konto-kategorie/konto-kategorie.component';
 import { HomeComponent } from './home/home.component';
+import { RegistrierenComponent } from './registrieren/registrieren.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     KontoComponent,
     KontoFragebogenComponent,
     KontoKategorieComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrierenComponent
   ],
   imports: [
     RouterModule.forRoot(
