@@ -277,7 +277,7 @@ export class QuizComponent implements OnInit {
 
   resultatAnzeigen() {
     document.getElementById('quiz').style.display = "none";
-    
+
     document.getElementById('resulat').style.display = "";
   }
 
@@ -301,5 +301,22 @@ export class QuizComponent implements OnInit {
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  routeLogin() {
+    this.router.navigateByUrl("/login");
+  }
+
+  routeHome(){
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
+  }
+
+
+  routeRegistrieren() {
+    this.router.navigateByUrl("/registrieren");
   }
 }

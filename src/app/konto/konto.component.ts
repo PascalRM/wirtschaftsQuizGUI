@@ -191,6 +191,10 @@ export class KontoComponent implements OnInit {
     }
   }
 
+  routeHome(){
+    this.router.navigateByUrl("/home");
+  }
+
   load() {
     if (this.user.api_token == null) {
       this.router.navigateByUrl("/login");

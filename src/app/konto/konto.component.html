@@ -8,13 +8,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Wirtschafsquiz</a>
+      <a class="navbar-brand" (click)="routeHome()">Wirtschafsquiz</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
           Hallo!,
-          <b>{{user.name}}</b>
+          <b style="cursor: pointer;">{{user.name}}</b>
         </li>
       </ul>
     </div>
@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-9">
           <input name="nameK" #nameK class="form-control" type="text">
-          <button style="float:right;margin-top: 5px;" class="btn btn-success" (click)="addKategorie(nameK)">Hinzufügen</button> 
+          <button style="float:right;margin-top: 5px;" class="btn btn-success" (click)="addKategorie(nameK)">Hinzufügen</button>
         </div>
       </div>
     </div>

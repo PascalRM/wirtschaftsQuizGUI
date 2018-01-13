@@ -112,6 +112,14 @@ export class KontoKategorieComponent implements OnInit {
       );
   }
 
+  routeHome() {
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
+  }
+
   load() {
     if (this.user.api_token == null) {
       this.router.navigateByUrl("/login");

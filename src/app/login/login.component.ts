@@ -65,7 +65,10 @@ export class LoginComponent implements OnInit {
   }
 
   routeRegistrieren() {
-    //
+    this.router.navigateByUrl("/registrieren");
+  }
+  routeHome(){
+    this.router.navigateByUrl("/home");
   }
 
   redirect() {

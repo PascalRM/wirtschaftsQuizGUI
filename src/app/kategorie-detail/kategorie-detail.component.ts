@@ -61,4 +61,20 @@ export class KategorieDetailComponent implements OnInit {
     FragebogenDetail.fragebogenDetail.fragebogen = fragebogen;
     this.router.navigateByUrl("/fragebogen");
   }
+
+  routeLogin() {
+    this.router.navigateByUrl("/login");
+  }
+
+  routeHome(){
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
+  }
+
+  routeRegistrieren() {
+    this.router.navigateByUrl("/registrieren");
+  }
 }

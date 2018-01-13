@@ -46,18 +46,26 @@ export class KategorieComponent implements OnInit {
       );
   }
 
-  loadKategorieDetail(id: number,kategorie:Kategorie) {
+  loadKategorieDetail(id: number, kategorie: Kategorie) {
     this.kategorieDetail.id_kategorie = id;
     this.kategorieDetail.kategorie = kategorie;
     this.router.navigateByUrl("/details");
   }
-  
-  routeLogin(){
+
+  routeLogin() {
     this.router.navigateByUrl("/login");
   }
 
-  routeRegistrieren(){
-    //
+  routeHome() {
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto() {
+    this.router.navigateByUrl("/konto");
+  }
+
+  routeRegistrieren() {
+    this.router.navigateByUrl("/registrieren");
   }
 
 }

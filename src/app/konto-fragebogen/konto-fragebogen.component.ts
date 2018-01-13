@@ -222,6 +222,14 @@ export class KontoFragebogenComponent implements OnInit {
     }
   }
 
+  routeHome(){
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
+  }
+
   load() {
     if (this.fragebogen == null) {
       this.router.navigateByUrl("/home");
@@ -232,7 +240,7 @@ export class KontoFragebogenComponent implements OnInit {
 
     document.getElementById("antwortEingabe").style.display = "none";
     document.getElementById("FalscheAntworten").style.display = "none";
-    document.getElementById("antwortWahrfalsch").style.display = "none";  
+    document.getElementById("antwortWahrfalsch").style.display = "none";
     document.getElementById('btn_addFrageAntwort').style.display = "none";
   }
 }

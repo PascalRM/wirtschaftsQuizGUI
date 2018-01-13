@@ -17,7 +17,7 @@ import { User } from '../user.model';
 })
 export class HomeComponent implements OnInit {
   user: User;
-  constructor(private location: Location, private router: Router) { 
+  constructor(private location: Location, private router: Router) {
     this.user = User.user;
   }
 
@@ -34,5 +34,9 @@ export class HomeComponent implements OnInit {
 
   routeQuiz(){
     this.router.navigateByUrl("/kategorie");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
   }
 }

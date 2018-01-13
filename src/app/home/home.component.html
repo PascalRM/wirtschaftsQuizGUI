@@ -13,7 +13,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="user.name != null">
-          <a><b>{{user.name}}</b></a>
+          <a style="cursor: pointer;" (click)="routeKonto()"><b>{{user.name}}</b></a>
         </li>
         <li *ngIf="user.name == null">
           <a>

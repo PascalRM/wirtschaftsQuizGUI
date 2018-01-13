@@ -101,6 +101,22 @@ export class FragebogenComponent implements OnInit {
     }
   }
 
+  routeLogin() {
+    this.router.navigateByUrl("/login");
+  }
+
+  routeHome(){
+    this.router.navigateByUrl("/home");
+  }
+
+  routeKonto(){
+    this.router.navigateByUrl("/konto");
+  }
+
+  routeRegistrieren() {
+    this.router.navigateByUrl("/registrieren");
+  }
+
   load() {
     if (this.fragebogen == null) {
       this.router.navigateByUrl("/kategorie");
