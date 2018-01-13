@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'kategorie', component: KategorieComponent },
   { path: 'details', component: KategorieDetailComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registrieren', component: RegistrierenComponent },
   { path: 'fragebogen', component: FragebogenComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'konto', component: KontoComponent },

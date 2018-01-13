@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   routeRegistrieren(){
-    //
+    this.router.navigateByUrl("/registrieren");
   }
 
   routeQuiz(){
