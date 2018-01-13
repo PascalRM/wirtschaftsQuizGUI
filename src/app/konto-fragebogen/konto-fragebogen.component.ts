@@ -230,6 +230,52 @@ export class KontoFragebogenComponent implements OnInit {
     this.router.navigateByUrl("/konto");
   }
 
+  start() {
+    console.log(this.fragen);
+    for (let i = 0; i < this.fragen.length; i++) {
+      let url;
+      let typ = this.fragen[i].typ;
+      //URL bestimmen aufgrund des Fragentyps
+      switch (this.fragen[i].typ) {
+        case 1:
+          url = 'https://arcane-escarpment-45624.herokuapp.com/api/multiplechoice/' + this.fragen[i].id_antwort;
+          break;
+        case 2:
+          url = 'https://arcane-escarpment-45624.herokuapp.com/api/eingabe/' + this.fragen[i].id_antwort;
+          break;
+        case 3:
+          url = 'https://arcane-escarpment-45624.herokuapp.com/api/truefalse/' + this.fragen[i].id_antwort;
+          break;
+        default:
+          console.log("Fehler: Fragentyp fehlerhaft");
+      }
+      //Antwort speichern aufgrund des Fragentyps
+      this.http
+        .get(url)
+        .subscribe((element: any) => {
+          try{
+
+          this.fragen[i].antwort = element.antwort;
+          //console.log(i + "|" + this.fragen[i].id +  " | " + this.fragen[i].frage + " | " +  this.fragen[i].typ +  " " + element.antwort);
+          }catch(exp){
+            alert(exp + " , " + this.fragen[i] + " , " + i)
+          }
+          if (typ == 1) {
+            this.fragen[i].falscheAntworten.push(element.falscheantwort1);
+            this.fragen[i].falscheAntworten.push(element.falscheantwort2);
+            this.fragen[i].falscheAntworten.push(element.falscheantwort3);
+          }
+
+        }, err => {
+          console.log(err);
+        }
+        );
+
+        FragebogenDetail.fragebogenDetail.fragen = this.fragen;
+        this.router.navigateByUrl("/quiz");
+    }
+  }
+
   load() {
     if (this.fragebogen == null) {
       this.router.navigateByUrl("/home");

@@ -21,7 +21,9 @@
   </div>
 </nav>
 <div id="content" class="container">
-  <h2>Fragebogen - {{fragebogen.name}}</h2>
+    <h2>Fragebogen - {{fragebogen.name}}
+        <button style="float:right;" type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
+      </h2>
   <hr>
   <div *ngFor="let frage of fragen">
     {{ frage.frage }}
