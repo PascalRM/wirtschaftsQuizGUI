@@ -2,7 +2,6 @@ import {
   Component, OnInit,
   Input
 } from '@angular/core';
-import { UserInterface } from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -11,12 +10,10 @@ import { Location } from '@angular/common';
 
 import { KategorieDetail } from '../kategorie_detail.model';
 import { Fragebogen } from '../fragebogen.model';
-import { FrageInterface } from '../frage.interface';
 import { FragebogenDetail } from '../fragebogen_detail.model';
 import { User } from '../user.model';
 import { Kategorie } from '../kategorie.model';
 import { Frage } from '../frage.model';
-import { Fragen } from '../fragen_detail.model';
 
 @Component({
   selector: 'app-konto-fragebogen',

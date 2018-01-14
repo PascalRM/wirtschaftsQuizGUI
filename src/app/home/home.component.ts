@@ -2,7 +2,6 @@ import {
   Component, OnInit,
   Input
 } from '@angular/core';
-import { UserInterface } from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';

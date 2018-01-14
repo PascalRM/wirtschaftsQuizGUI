@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
 import { Kategorie } from '../kategorie.model';
-import { UserInterface } from '../login/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -46,7 +45,7 @@ export class KategorieComponent implements OnInit {
       );
   }
 
-  loadKategorieDetail(id: number, kategorie: Kategorie) {
+  setKategorieDetail(id: number, kategorie: Kategorie) {
     this.kategorieDetail.id_kategorie = id;
     this.kategorieDetail.kategorie = kategorie;
     this.router.navigateByUrl("/details");

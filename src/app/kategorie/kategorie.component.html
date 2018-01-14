@@ -35,7 +35,7 @@
     Kategorien
   </h2>
   <hr>
-  <div class="well kat_box" *ngFor="let kategorie of kategorien" (click)="loadKategorieDetail(kategorie.id,kategorie)">
+  <div class="well kat_box" *ngFor="let kategorie of kategorien" (click)="setKategorieDetail(kategorie.id,kategorie)">
     <div>
       <span>{{ kategorie.name }}</span>
     </div>
