@@ -47,7 +47,7 @@
           <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
         </div>
         <div class="col-md-9">
-          <input name="nameK" #nameK class="form-control" type="text">
+          <input name="nameK" #nameK class="form-control" type="text" required minlength="4">
           <button style="float:right;margin-top: 5px;" class="btn btn-success" (click)="addKategorie(nameK)">Hinzufügen</button>
         </div>
       </div>

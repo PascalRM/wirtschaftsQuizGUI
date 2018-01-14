@@ -60,7 +60,6 @@ export class KontoFragebogenComponent implements OnInit {
         console.log("failed");
       }
       );
-    console.log(this.fragen);
   }
 
   deleteFrage(frage: Frage) {
@@ -95,15 +94,34 @@ export class KontoFragebogenComponent implements OnInit {
 
   addFrageAntwort(fragee: HTMLInputElement, antwort: HTMLInputElement, f1: HTMLInputElement, f2: HTMLInputElement, f3: HTMLInputElement) {
     //Frage hinzufügen
-    console.log(fragee.value + " " + antwort.value + " " + f1.value + " " + f2.value + " " + f3.value);
     this.frage = fragee.value;
-    if (this.wertRadiobtn == "Multiplechoice") {
-      this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value);
-    } else if (this.wertRadiobtn == "Eingabe") {
-      this.addEingabe(antwort.value);
-    } else if (this.wertRadiobtn == "WahrFalsch") {
-      this.addWahrfalsch();
+    if (fragee.value.length == 0) {
+      document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte geben Sie eine Frage ein.</div>';
+    } else {
+
+
+      if (this.wertRadiobtn == "Multiplechoice") {
+        if (antwort.value.length == 0 || f1.value.length == 0 || f2.value.length == 0 || f3.value.length == 0) {
+          document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte füllen Sie alle Felder aus.</div>';
+        } else {
+          this.addMultiplechoice(antwort.value, f1.value, f2.value, f3.value);
+        }
+      } else if (this.wertRadiobtn == "Eingabe") {
+        if (antwort.value.length == 0) {
+          document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte füllen Sie alle Felder aus.</div>';
+        } else {
+          this.addEingabe(antwort.value);
+        }
+      } else if (this.wertRadiobtn == "WahrFalsch") {
+        if(this.wertRadiobtn_antwort.valueOf.length == 0){
+          document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte füllen Sie alle Felder aus.</div>';
+        }else{
+          this.addWahrfalsch();
+        }
+      }
     }
+
+
   }
 
   addMultiplechoice(antwortR, falsch1, falsch2, falsch3) {
@@ -195,7 +213,6 @@ export class KontoFragebogenComponent implements OnInit {
 
   radioChangeHandler(event: any) {
     this.wertRadiobtn = event.target.value;
-    console.log(this.wertRadiobtn)
     if (this.wertRadiobtn == "Multiplechoice") {
       document.getElementById("antwortEingabe").style.display = "block";
       document.getElementById("FalscheAntworten").style.display = "block";
@@ -222,16 +239,15 @@ export class KontoFragebogenComponent implements OnInit {
     }
   }
 
-  routeHome(){
+  routeHome() {
     this.router.navigateByUrl("/home");
   }
 
-  routeKonto(){
+  routeKonto() {
     this.router.navigateByUrl("/konto");
   }
 
   start() {
-    console.log(this.fragen);
     for (let i = 0; i < this.fragen.length; i++) {
       let url;
       let typ = this.fragen[i].typ;
@@ -253,11 +269,9 @@ export class KontoFragebogenComponent implements OnInit {
       this.http
         .get(url)
         .subscribe((element: any) => {
-          try{
-
-          this.fragen[i].antwort = element.antwort;
-          //console.log(i + "|" + this.fragen[i].id +  " | " + this.fragen[i].frage + " | " +  this.fragen[i].typ +  " " + element.antwort);
-          }catch(exp){
+          try {
+            this.fragen[i].antwort = element.antwort;
+          } catch (exp) {
             alert(exp + " , " + this.fragen[i] + " , " + i)
           }
           if (typ == 1) {
@@ -271,8 +285,8 @@ export class KontoFragebogenComponent implements OnInit {
         }
         );
 
-        FragebogenDetail.fragebogenDetail.fragen = this.fragen;
-        this.router.navigateByUrl("/quiz");
+      FragebogenDetail.fragebogenDetail.fragen = this.fragen;
+      this.router.navigateByUrl("/quiz");
     }
   }
 

@@ -74,7 +74,6 @@ export class QuizComponent implements OnInit {
     this.fertig = false;
 
     this.fragenAusstehend = this.fragebogenDeatil.fragen.slice(0);
-    console.log(this.fragenAusstehend);
     this.naechsteFrage();
   }
 
@@ -126,7 +125,6 @@ export class QuizComponent implements OnInit {
 
         let richtigeAntwort = this.getRandomInt(1, 4);
 
-        console.log(richtigeAntwort);
         //Die richtige Anwort wird gesetzt
         switch (richtigeAntwort) {
           case 1:

@@ -56,7 +56,6 @@ export class FragebogenComponent implements OnInit {
   }
 
   start() {
-    console.log(this.fragen);
     for (let i = 0; i < this.fragen.length; i++) {
       let url;
       let typ = this.fragen[i].typ;

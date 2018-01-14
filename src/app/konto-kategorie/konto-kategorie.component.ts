@@ -91,13 +91,16 @@ export class KontoKategorieComponent implements OnInit {
       id_kategorie: this.kategorieDetail.id_kategorie,
       id_user: this.user.id,
     }
-    console.log(data);
     var headers = new HttpHeaders().set("Authorization", "Bearer " + this.user.api_token);
     this.http
       .post('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen', data, { headers })
       .subscribe((data: any) => {
       }, err => {
         console.log("Failed" + " " + err.value);
+        if(nameF.value.length == 0){
+          document.getElementById("infoKategorie").innerHTML = '<div id="fehlerKategorie" class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte geben Sie einen Namen ein.</div>';
+        }
+
       }, () => {
         this.fragebogen = [];
         this.getFragebogen();

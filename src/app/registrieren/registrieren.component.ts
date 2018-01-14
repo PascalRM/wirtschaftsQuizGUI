@@ -48,7 +48,6 @@ export class RegistrierenComponent implements OnInit {
             } else {
               exists = false;
             }
-            console.log(antwort.length + " " + exists);
           }, err => {
             console.log("Failed" + " " + err.value);
           }, () => {
@@ -69,9 +68,7 @@ export class RegistrierenComponent implements OnInit {
     this.http
       .post('https://arcane-escarpment-45624.herokuapp.com/api/registrieren', data)
       .subscribe((data: any) => {
-        console.log(data);
       }, () => {
-        console.log("helloooo");
         //Überprüfen ob der Benutzer eingetragen wurde
         let exists = false;
         let antwort;

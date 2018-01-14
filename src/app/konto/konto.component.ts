@@ -132,7 +132,6 @@ export class KontoComponent implements OnInit {
         );
     } else {
       document.getElementById("infoKategorie").innerHTML = '<div id="fehlerKategorie" class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Diese Kategorie beinhaltet noch Fragenbogen und kann nicht gelöscht werden.</div>';
-      console.log("error");
     }
   }
 
@@ -142,7 +141,6 @@ export class KontoComponent implements OnInit {
       .delete('https://arcane-escarpment-45624.herokuapp.com/api/fragebogen/' + fragebog.id, { headers })
       .subscribe(async (data: any) => {
       }, err => {
-        console.log("failed");
         document.getElementById("infoKategorie").innerHTML = '<div id="fehlerFragebogen" class="alert alert-danger alert-dismissable" ><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Dieser Fragebogen konnte nicht gelöscht werden</div>';
       }, () => {
         this.fragebogen = [];
@@ -162,7 +160,9 @@ export class KontoComponent implements OnInit {
       .post('https://arcane-escarpment-45624.herokuapp.com/api/kategorie', data, { headers })
       .subscribe((data: any) => {
       }, err => {
-        console.log("Failed" + " " + err.value);
+        if(nameK.value.length == 0){
+          document.getElementById("infoKategorie").innerHTML = '<div id="fehlerKategorie" class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte geben Sie einen Namen ein.</div>';
+        }
       }, () => {
         this.kategorien = [];
         this.getKategorie();
