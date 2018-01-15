@@ -95,8 +95,6 @@ export class KontoFragebogenComponent implements OnInit {
     if (fragee.value.length == 0) {
       document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte geben Sie eine Frage ein.</div>';
     } else {
-
-
       if (this.wertRadiobtn == "Multiplechoice") {
         if (antwort.value.length == 0 || f1.value.length == 0 || f2.value.length == 0 || f3.value.length == 0) {
           document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte füllen Sie alle Felder aus.</div>';
@@ -110,7 +108,7 @@ export class KontoFragebogenComponent implements OnInit {
           this.addEingabe(antwort.value);
         }
       } else if (this.wertRadiobtn == "WahrFalsch") {
-        if(this.wertRadiobtn_antwort.valueOf.length == 0){
+        if(this.wertRadiobtn_antwort == null){
           document.getElementById("infoFrage").innerHTML = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Fehler!</strong> Bitte füllen Sie alle Felder aus.</div>';
         }else{
           this.addWahrfalsch();
@@ -204,6 +202,11 @@ export class KontoFragebogenComponent implements OnInit {
         document.getElementById('btn_add_logo').classList.add("glyphicon-plus");
         document.getElementById('btn_add_logo').classList.remove("glyphicon-remove");
         document.getElementById('btn_add').style.backgroundColor = '#5cb85c';
+        (<HTMLFormElement>document.getElementById('form_typ')).reset();
+        (<HTMLFormElement>document.getElementById('from_frage')).reset();
+        (<HTMLFormElement>document.getElementById('form_antwort')).reset();
+        (<HTMLFormElement>document.getElementById('form_wahrflasch')).reset();
+        (<HTMLFormElement>document.getElementById('form_falscheantworten')).reset();
       }
       );
   }
@@ -226,6 +229,10 @@ export class KontoFragebogenComponent implements OnInit {
       document.getElementById("antwortWahrfalsch").style.display = "block";
       document.getElementById('btn_addFrageAntwort').style.display = "block";
     }
+    (<HTMLFormElement>document.getElementById('from_frage')).reset();
+    (<HTMLFormElement>document.getElementById('form_antwort')).reset();
+    (<HTMLFormElement>document.getElementById('form_wahrflasch')).reset();
+    (<HTMLFormElement>document.getElementById('form_falscheantworten')).reset();
   }
 
   radioChangeHandlerWahrfalsch(event: any) {

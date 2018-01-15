@@ -13,7 +13,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-            <b style="cursor: pointer;" (click)="routeKonto()">{{user.name}}</b>
+          <b style="cursor: pointer;" (click)="routeKonto()">{{user.name}}</b>
         </li>
       </ul>
     </div>
@@ -21,9 +21,9 @@
   </div>
 </nav>
 <div id="content" class="container">
-    <h2>Fragebogen - {{fragebogen.name}}
-        <button style="float:right;" type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
-      </h2>
+  <h2>Fragebogen - {{fragebogen.name}}
+    <button style="float:right;" type="button" class="btn btn-success" (click)="start()">Quiz starten</button>
+  </h2>
   <hr>
   <div *ngFor="let frage of fragen">
     {{ frage.frage }}
@@ -40,15 +40,17 @@
       <div id="radio1" class="col-md-3">
         <label class=" col-form-label">Typ</label>
       </div>
-      <div id="radio1" class="col-md-3">
-        <input name="typ" type="radio" value="Multiplechoice" (change)="radioChangeHandler($event)"> Multiplechoice
-      </div>
-      <div id="radio2" class="col-md-3">
-        <input name="typ" type="radio" value="Eingabe" (change)="radioChangeHandler($event)"> Eingabe
-      </div>
-      <div id="radio3" class="col-md-3">
-        <input name="typ" type="radio" value="WahrFalsch" (change)="radioChangeHandler($event)"> Wahr / Falsch
-      </div>
+      <form id="form_typ">
+        <div id="radio1" class="col-md-3">
+          <input name="typ" type="radio" value="Multiplechoice" (change)="radioChangeHandler($event)"> Multiplechoice
+        </div>
+        <div id="radio2" class="col-md-3">
+          <input name="typ" type="radio" value="Eingabe" (change)="radioChangeHandler($event)"> Eingabe
+        </div>
+        <div id="radio3" class="col-md-3">
+          <input name="typ" type="radio" value="WahrFalsch" (change)="radioChangeHandler($event)"> Wahr / Falsch
+        </div>
+      </form>
       <br>
     </div>
     <br>
@@ -57,7 +59,9 @@
         <label class=" col-form-label">Frage</label>
       </div>
       <div class="col-md-9">
-        <input name="frage" #frage class="form-control" type="text">
+        <form id="from_frage">
+          <input name="frage" #frage class="form-control" type="text">
+        </form>
       </div>
     </div>
     <br>
@@ -66,54 +70,60 @@
         <label class=" col-form-label">Antwort</label>
       </div>
       <div class="col-md-9">
-        <input name="antwort" #antwort class="form-control" type="text">
+        <form id="form_antwort">
+          <input name="antwort" #antwort class="form-control" type="text">
+        </form>
       </div>
     </div>
     <div id="antwortWahrfalsch" class="row">
       <div class="col-md-3">
         <label class=" col-form-label">Antwort</label>
       </div>
-      <div class="col-md-4">
-        <input name="wahrfalsch" type="radio" value="Wahr" (change)="radioChangeHandlerWahrfalsch($event)">Wahr
-      </div>
-      <div class="col-md-4">
-        <input name="wahrfalsch" type="radio" value="Falsch" (change)="radioChangeHandlerWahrfalsch($event)">Falsch
-      </div>
+      <form id="form_wahrflasch">
+        <div class="col-md-4">
+          <input name="wahrfalsch" type="radio" value="Wahr" (change)="radioChangeHandlerWahrfalsch($event)">Wahr
+        </div>
+        <div class="col-md-4">
+          <input name="wahrfalsch" type="radio" value="Falsch" (change)="radioChangeHandlerWahrfalsch($event)">Falsch
+        </div>
+      </form>
     </div>
     <br>
+
     <div id="FalscheAntworten">
-      <div class="row">
-        <div class="col-md-3">
-          <label class=" col-form-label">Falsche Antwort 1</label>
+      <form id="form_falscheantworten">
+        <div class="row">
+          <div class="col-md-3">
+            <label class=" col-form-label">Falsche Antwort 1</label>
+          </div>
+          <div class="col-md-9">
+            <input name="antwort" #f1 class="form-control" type="text">
+          </div>
         </div>
-        <div class="col-md-9">
-          <input name="antwort" #f1 class="form-control" type="text">
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <label class=" col-form-label">Falsche Antwort 2</label>
+          </div>
+          <div class="col-md-9">
+            <input name="antwort" #f2 class="form-control" type="text">
+          </div>
         </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-3">
-          <label class=" col-form-label">Falsche Antwort 2</label>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <label class=" col-form-label">Falsche Antwort 3</label>
+          </div>
+          <div class="col-md-9">
+            <input name="antwort" #f3 class="form-control" type="text">
+          </div>
         </div>
-        <div class="col-md-9">
-          <input name="antwort" #f2 class="form-control" type="text">
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-3">
-          <label class=" col-form-label">Falsche Antwort 3</label>
-        </div>
-        <div class="col-md-9">
-          <input name="antwort" #f3 class="form-control" type="text">
-        </div>
-      </div>
-      <br>
+        <br>
+      </form>
     </div>
     <br>
     <button id="btn_addFrageAntwort" style="float:right;margin-top:-25px;" class="btn btn-success" (click)="addFrageAntwort(frage,antwort,f1,f2,f3)">Hinzufügen</button>
   </div>
-
   <div id="btn_add" class="btn btn-success" style="width: 100%;" (click)="openAddFrageAntwort()">
     <span id="btn_add_logo" class="glyphicon glyphicon-plus"></span>
   </div>

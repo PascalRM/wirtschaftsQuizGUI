@@ -35,7 +35,9 @@ export class RegistrierenComponent implements OnInit {
     } else {
       if (passwordF.value != passwordRepeatF.value) {
         this.result = "Passwörter stimmen nicht überein";
-      } else {
+      } else if(emailF.value.indexOf("@") < 0){
+        this.result = "Bitte geben Sie eine gültige Mail-Adresse ein."
+      }else {
         let exists = false;
         let antwort;
         this.http
