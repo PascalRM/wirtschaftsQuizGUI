@@ -178,6 +178,13 @@ export class QuizComponent implements OnInit {
     }
   }
 
+
+  ueberspringen() {
+    this.anzFalsche++;
+    this.result = "Die richtige Antwort wäre: " + this.frage.antwort;
+    document.getElementById("result").style.color = "black";
+  }
+
   /*
   *****************************************
     Funtktion zur Überprüfung des Antworts
@@ -302,11 +309,11 @@ export class QuizComponent implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
-  routeHome(){
+  routeHome() {
     this.router.navigateByUrl("/home");
   }
 
-  routeKonto(){
+  routeKonto() {
     this.router.navigateByUrl("/konto");
   }
 
